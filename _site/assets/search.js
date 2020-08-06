@@ -1,1 +1,1 @@
-window.TEXT_SEARCH_DATA={'posts':[{'title':"Hello World",'url':"/2020/08/04/HelloWold.html"}]};
+window.TEXT_SEARCH_DATA={'posts':[{'title':"Hello World",'url':"/2020/08/04/HelloWold.html"},{'title':"AWS 本地采用 ECR 镜像进行调试",'url':"/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html"}]};
