@@ -279,16 +279,16 @@
             href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2020-08-04-本地采用 ECR 镜像进行调试.md">
             <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="AWS 本地采用 ECR 镜像进行调试"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=AWS">AWS</a>
+                href="/archive.html?tag=aws">aws</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=ECR">ECR</a>
+                href="/archive.html?tag=ecr">ecr</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=Docker">Docker</a>
+                href="/archive.html?tag=docker">docker</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月04日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="HelloWold:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Your Name"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00">
-    <meta itemprop="keywords" content="AWS,ECR,Docker"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="AWSECR:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00">
+    <meta itemprop="keywords" content="aws,ecr,docker"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
 <div class="article__content" itemprop="articleBody"><h1 id="前置条件">前置条件</h1>
@@ -305,17 +305,34 @@
   <li>获取 ecr 授权密码，cmd 中输入 <code class="language-plaintext highlighter-rouge">aws ecr get-login-password</code></li>
   <li>本地 docker 授权 ecr，cmd 中输入 <code class="language-plaintext highlighter-rouge">docker login -u AWS xxx.dkr.ecr.us-east-1.amazonaws.com</code></li>
 </ol>
-</div><section class="article__sharing d-print-none"><!-- AddToAny BEGIN -->
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_twitter"></a>
-<a class="a2a_button_google_plus"></a>
-<a class="a2a_button_linkedin"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-<!-- AddToAny END -->
-</section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-04T00:00:00+08:00"><!-- start custom article footer snippet -->
+</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-04T00:00:00+08:00"><!-- start custom article footer snippet -->
+
+
+
+
+    <div class="article__content my-3">
+      <hr />
+      <p><strong>你的支持是我的动力。你可以通过以下方式支持我：</strong></p>
+      <ul>
+        <li>给该项目点赞&nbsp;<a style="vertical-align: text-bottom;" href="https://github.com/chaimch/chaimch.github.io.git/">
+          <img src="https://img.shields.io/github/stars/chaimch/chaimch.github.io.svg?label=Stars&style=social" alt="给该项目点赞" />
+        </a></li>
+        <li>关注我的 Github&nbsp;<a style="vertical-align: text-bottom;"  href="https://github.com/chaimch/">
+          <img src="https://img.shields.io/github/followers/chaimch.svg?label=Follow&style=social" alt="关注我的 Github" />
+        </a></li>
+        <li>打赏</li>
+      </ul>
+      <table>
+        <thead><tr>
+          <th>微信支付</th>
+          <th>支付宝</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><img style="max-widht: 150px; max-height: 150px" src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/4htwsH.png" alt="微信支付二维码" /></td>
+          <td><img style="max-widht: 150px; max-height: 150px" src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/T3Xzvi.jpg" alt="支付宝二维码" /></td>
+        </tr></tbody>
+      </table>
+    </div>
 
 <!-- end custom article footer snippet -->
 <div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">订阅</a></div>
@@ -362,14 +379,13 @@
             </div></div></div><div class="page__footer d-print-none">
 <footer class="footer py-4 js-page-footer">
   <div class="main"><div itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Your Name"><meta itemprop="url" content="/"><meta itemprop="description" content="I am an amazing person."><div class="footer__author-links"><div class="author-links">
-  <ul class="menu menu--nowrap menu--inline"></ul>
+      <meta itemprop="name" content="Chaim"><meta itemprop="url" content="https://github.com/chaimch"><meta itemprop="description" content="I am an amazing person."><div class="footer__author-links"><div class="author-links">
+  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="https://github.com/chaimch"></ul>
 </div>
 </div>
     </div><div class="site-info mt-2">
       <div>© Chaim Blog 2020,
-        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> & <a
-        title="TeXt is a super customizable Jekyll theme." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
+        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="https://github.com/chaimch/">Chaim</a>
       </div>
     </div>
   </div>

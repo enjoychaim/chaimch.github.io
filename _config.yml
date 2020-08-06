@@ -34,9 +34,9 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 ## => Author and Social
 ##############################
 author:
-  type      : # "person" (default), "organization"
-  name      : Your Name
-  url       :
+  type      : person # "person" (default), "organization"
+  name      : Chaim
+  url       : https://github.com/chaimch
   avatar    : https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/cat.jpg # path or url of avatar image (square)
   bio       : I am an amazing person.
   email     :
@@ -108,7 +108,7 @@ sources: bootcdn # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: addtoany # false (default), "addtoany", "addthis", "custom"
+  provider: false # false (default), "addtoany", "addthis", "custom"
 
   ## AddThis
   addthis:
