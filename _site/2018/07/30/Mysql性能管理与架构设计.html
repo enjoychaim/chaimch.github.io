@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="zh-Hans">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Hello World - Chaim Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>性能管理与架构设计 - Chaim Blog</title>
 
-<meta name="description" content="H1h1 descriptionH2h2 descriptionH3h3 description">
-<link rel="canonical" href="http://localhost:4000/2020/08/04/HelloWold.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="电商双11大促成败关键:  数据库和服务器的稳定  源代码相同, web服务器可以横向扩展, 来保证量大时的稳定性  数据库无法拷贝数据来实现稳定性, 很难保证完整性和一致性性能指标  rt, response time, 响应时间  pv,  , 页面被浏览次数  tps, transactions per s...">
+<link rel="canonical" href="http://localhost:4000/2018/07/30/Mysql%E6%80%A7%E8%83%BD%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -273,24 +273,108 @@
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Hello World</h1></header><span class="split-space">&nbsp;</span>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>性能管理与架构设计</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="在 Github 上修改"
-            href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2020-08-04-HelloWold.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Hello World"><div class="article__info clearfix"><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月04日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="HelloWold:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+            href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2018-07-30-Mysql性能管理与架构设计.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="性能管理与架构设计"><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=mysql">mysql</a>
+            </li><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=database">database</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月30日</span>
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="mysql:database:2018-07-30">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-30T00:00:00+08:00">
+    <meta itemprop="keywords" content="mysql,database"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
-<div class="article__content" itemprop="articleBody"><h1 id="h1">H1</h1>
-<p>h1 description</p>
+<div class="article__content" itemprop="articleBody"><h2 id="电商双11大促成败关键--数据库和服务器的稳定">电商双11大促成败关键:  数据库和服务器的稳定</h2>
 
-<h2 id="h2">H2</h2>
-<p>h2 description</p>
+<ol>
+  <li>源代码相同, web服务器可以横向扩展, 来保证量大时的稳定性</li>
+  <li>数据库无法拷贝数据来实现稳定性, 很难保证完整性和一致性</li>
+</ol>
 
-<h3 id="h3">H3</h3>
-<p>h3 description</p>
+<h2 id="性能指标">性能指标</h2>
 
-</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-04T00:00:00+08:00"><!-- start custom article footer snippet -->
+<ul>
+  <li>rt, response time, 响应时间</li>
+  <li>pv,  , 页面被浏览次数</li>
+  <li>tps, transactions per second, 每秒内的事务数(包括用户请求服务器, 服务器内部处理, 服务器返回给用户)</li>
+  <li>qps, queries per seconds, 每秒查询率, 一台服务器每秒能够响应的查询次数</li>
+</ul>
+
+<h2 id="影响数据库性能因素">影响数据库性能因素</h2>
+
+<ol>
+  <li>sql的查询速度(大部分都是由慢查询导致的)</li>
+  <li>服务器硬件</li>
+  <li>网卡流量</li>
+  <li>磁盘IO</li>
+</ol>
+
+<h2 id="大表-记录行数单表超过千万行-表数据文件超过10g">大表: 记录行数单表超过千万行, 表数据文件超过10G</h2>
+
+<ol>
+  <li>慢查询耗时长</li>
+  <li>建立索引需要很长时间, &lt;5.5建立索引会锁表, &gt;=5.5引起主从延迟</li>
+</ol>
+
+<h2 id="大事务-区别与其他文件系统的特性-具有原子性的sql语句-运行时间长-操作数据比较多的事务">大事务: 区别与其他文件系统的特性, 具有原子性的sql语句; 运行时间长, 操作数据比较多的事务</h2>
+
+<ol>
+  <li>原子性, 整个事务操作要么全部成功, 要么全部失败</li>
+  <li>一致性, 事务开始之前或结束后数据库完整性没有被破坏</li>
+  <li>隔离性, 一个事务对数据库中数据修改后, 在未提交完成前对于其他事务是不可见的; 未提交读, 已提交读, 可重复读, 可串行化</li>
+</ol>
+
+<h2 id="三大范式">三大范式</h2>
+
+<ol>
+  <li>1NF, 所有字段都是单一属性, 各个列都是基本数据类型构成, 设计出来是简单的二维表</li>
+  <li>2NF, 只具有一个业务主键, 不存在非主键列只对部分主键的依赖关系(组合主键才有的情况)</li>
+  <li>3NF, 非主属性既不部分依赖也不传递依赖于业务主键</li>
+</ol>
+
+<h2 id="sql性能获取">SQL性能获取</h2>
+
+<ol>
+  <li>慢查询日志</li>
+  <li>
+    <ol>
+      <li>slow_query_log  启动或停止慢查询日志</li>
+      <li>通过脚本定时开关, 实现某段时间开启慢查询</li>
+      <li>slow_query_log_file 慢查询日志的存储路径及文件</li>
+      <li>long_query_time  指定记录慢查询日志sql执行时间阀值(默认10s, 记录所有符合条件的sql, 包括回滚的sql)</li>
+      <li>log_queries_not_using_indexs 是否记录未使用索引的sql</li>
+      <li>set global xxx=on</li>
+    </ol>
+  </li>
+  <li>实时性能获取</li>
+  <li>
+    <ol>
+      <li>information_schema的processlist表</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="数据库结构优化目的">数据库结构优化目的</h2>
+
+<ol>
+  <li>减少数据冗余, 必要的冗余也是必须的</li>
+  <li>避免数据维护中出现更新(依赖其它实体), 插入(多行更新)和删除异常(依赖其它实体)</li>
+  <li>节约数据存储空间</li>
+  <li>提高查询效率</li>
+</ol>
+
+<h2 id="设计表原则">设计表原则</h2>
+
+<ol>
+  <li>减少连表操作</li>
+  <li>减少不必要的冗余</li>
+</ol>
+
+</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2018-07-30T00:00:00+08:00"><!-- start custom article footer snippet -->
 
 
 
@@ -328,7 +412,7 @@
       </a>
     </p>
   </div></div></footer>
-<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html">网站架构演变</a></div><div class="next"><span>下篇</span><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html">AWS 本地采用 ECR 镜像进行调试</a></div></div></div>
+<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2018/07/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B.html">函数式编程</a></div><div class="next"><span>下篇</span><a href="/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html">网站架构演变</a></div></div></div>
 
 </div>
 
