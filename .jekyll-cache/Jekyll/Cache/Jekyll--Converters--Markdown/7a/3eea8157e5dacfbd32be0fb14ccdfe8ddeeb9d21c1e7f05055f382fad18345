@@ -1,0 +1,36 @@
+I"�<h2 id="控制台直接修改-ebs-大小">控制台直接修改 ebs 大小</h2>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200807120654364.png" alt="image-20200807120654364" /></p>
+
+<h2 id="修改对应-ec2-的文件系统">修改对应 ec2 的文件系统</h2>
+
+<h3 id="根分区-">根分区 /</h3>
+
+<p>直接重启实例才能生效</p>
+
+<h3 id="文件系统">文件系统</h3>
+
+<ol>
+  <li>查看文件系统使用情况</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ec2-user@ip-172-30-30-72 ~]$ df -h
+文件系统        容量  已用  可用 已用% 挂载点
+devtmpfs         32G     0   32G    0% /dev
+tmpfs            32G     0   32G    0% /dev/shm
+tmpfs            32G  684K   32G    1% /run
+tmpfs            32G     0   32G    0% /sys/fs/cgroup
+/dev/nvme0n1p1   20G  2.4G   18G   12% /
+/dev/nvme1n1     80G   80G   20K  100% /home
+tmpfs           6.3G     0  6.3G    0% /run/user/1000
+</code></pre></div></div>
+
+<ol>
+  <li>扩展文件系统</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install xfsprogs
+sudo xfs_growfs -d /home
+</code></pre></div></div>
+
+:ET

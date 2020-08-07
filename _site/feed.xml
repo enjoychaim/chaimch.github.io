@@ -1,5 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-07T11:53:12+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
-</subtitle><author><name>Chaim</name></author><entry><title type="html">Mac禁用option组合键特殊字符.md</title><link href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html" rel="alternate" type="text/html" title="Mac禁用option组合键特殊字符.md" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Mac%20%E7%A6%81%E7%94%A8%20option%20%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html">&lt;h1 id=&quot;iterm2-中&quot;&gt;Iterm2 中&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-07T12:09:50+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
+</subtitle><author><name>Chaim</name></author><entry><title type="html">EBS 扩容</title><link href="http://localhost:4000/2020/08/07/EBS-%E6%89%A9%E5%AE%B9.html" rel="alternate" type="text/html" title="EBS 扩容" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/EBS%20%E6%89%A9%E5%AE%B9</id><content type="html" xml:base="http://localhost:4000/2020/08/07/EBS-%E6%89%A9%E5%AE%B9.html">&lt;h2 id=&quot;控制台直接修改-ebs-大小&quot;&gt;控制台直接修改 ebs 大小&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200807120654364.png&quot; alt=&quot;image-20200807120654364&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;修改对应-ec2-的文件系统&quot;&gt;修改对应 ec2 的文件系统&lt;/h2&gt;
+
+&lt;h3 id=&quot;根分区-&quot;&gt;根分区 /&lt;/h3&gt;
+
+&lt;p&gt;直接重启实例才能生效&lt;/p&gt;
+
+&lt;h3 id=&quot;文件系统&quot;&gt;文件系统&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;查看文件系统使用情况&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[ec2-user@ip-172-30-30-72 ~]$ df -h
+文件系统        容量  已用  可用 已用% 挂载点
+devtmpfs         32G     0   32G    0% /dev
+tmpfs            32G     0   32G    0% /dev/shm
+tmpfs            32G  684K   32G    1% /run
+tmpfs            32G     0   32G    0% /sys/fs/cgroup
+/dev/nvme0n1p1   20G  2.4G   18G   12% /
+/dev/nvme1n1     80G   80G   20K  100% /home
+tmpfs           6.3G     0  6.3G    0% /run/user/1000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;扩展文件系统&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo yum install xfsprogs
+sudo xfs_growfs -d /home
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Chaim</name></author><category term="aws" /><category term="ebs" /><summary type="html">控制台直接修改 ebs 大小 修改对应 ec2 的文件系统 根分区 / 直接重启实例才能生效 文件系统 查看文件系统使用情况 [ec2-user@ip-172-30-30-72 ~]$ df -h 文件系统 容量 已用 可用 已用% 挂载点 devtmpfs 32G 0 32G 0% /dev tmpfs 32G 0 32G 0% /dev/shm tmpfs 32G 684K 32G 1% /run tmpfs 32G 0 32G 0% /sys/fs/cgroup /dev/nvme0n1p1 20G 2.4G 18G 12% / /dev/nvme1n1 80G 80G 20K 100% /home tmpfs 6.3G 0 6.3G 0% /run/user/1000 扩展文件系统 sudo yum install xfsprogs sudo xfs_growfs -d /home</summary></entry><entry><title type="html">Mac禁用option组合键特殊字符.md</title><link href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html" rel="alternate" type="text/html" title="Mac禁用option组合键特殊字符.md" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Mac%20%E7%A6%81%E7%94%A8%20option%20%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html">&lt;h1 id=&quot;iterm2-中&quot;&gt;Iterm2 中&lt;/h1&gt;
 
 &lt;h2 id=&quot;操作步骤&quot;&gt;操作步骤&lt;/h2&gt;
 
