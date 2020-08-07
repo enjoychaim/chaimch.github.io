@@ -1,0 +1,31 @@
+I"�<h1 id="iterm2-中">Iterm2 中</h1>
+
+<h2 id="操作步骤">操作步骤</h2>
+
+<ol>
+  <li>Preference</li>
+  <li>Profiles</li>
+  <li>default</li>
+  <li>keys</li>
+  <li>set option 为 Esc+</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623142907502.png" alt="image-20200623142907502" /></p>
+
+<h1 id="vscode-中解决打开-terminal-时候使用-option-仍冲突">vscode 中(解决打开 terminal 时候使用 option 仍冲突)</h1>
+
+<h2 id="操作步骤-1">操作步骤</h2>
+
+<ol>
+  <li>cmd + shif +p</li>
+  <li>open settings (ui)</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143042248.png" alt="image-20200623143042248" /></p>
+
+<ol>
+  <li>terminal.integrated.macOptionIsMeta 为 true</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143131118.png" alt="image-20200623143131118" /></p>
+:ET

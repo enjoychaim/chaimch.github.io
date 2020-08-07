@@ -1,5 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-07T11:10:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
-</subtitle><author><name>Chaim</name></author><entry><title type="html">Redis内存模型</title><link href="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html" rel="alternate" type="text/html" title="Redis内存模型" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">&lt;h1 id=&quot;内存使用统计&quot;&gt;内存使用统计&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-07T11:39:20+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
+</subtitle><author><name>Chaim</name></author><entry><title type="html">Mac禁用option组合键特殊字符.md</title><link href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.md.html" rel="alternate" type="text/html" title="Mac禁用option组合键特殊字符.md" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Mac%20%E7%A6%81%E7%94%A8%20option%20%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.md</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.md.html">&lt;h1 id=&quot;iterm2-中&quot;&gt;Iterm2 中&lt;/h1&gt;
+
+&lt;h2 id=&quot;操作步骤&quot;&gt;操作步骤&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Preference&lt;/li&gt;
+  &lt;li&gt;Profiles&lt;/li&gt;
+  &lt;li&gt;default&lt;/li&gt;
+  &lt;li&gt;keys&lt;/li&gt;
+  &lt;li&gt;set option 为 Esc+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623142907502.png&quot; alt=&quot;image-20200623142907502&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;vscode-中解决打开-terminal-时候使用-option-仍冲突&quot;&gt;vscode 中(解决打开 terminal 时候使用 option 仍冲突)&lt;/h1&gt;
+
+&lt;h2 id=&quot;操作步骤-1&quot;&gt;操作步骤&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;cmd + shif +p&lt;/li&gt;
+  &lt;li&gt;open settings (ui)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143042248.png&quot; alt=&quot;image-20200623143042248&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;terminal.integrated.macOptionIsMeta 为 true&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143131118.png&quot; alt=&quot;image-20200623143131118&quot; /&gt;&lt;/p&gt;</content><author><name>Chaim</name></author><category term="mac" /><category term="option" /><summary type="html">Iterm2 中 操作步骤 Preference Profiles default keys set option 为 Esc+ vscode 中(解决打开 terminal 时候使用 option 仍冲突) 操作步骤 cmd + shif +p open settings (ui) terminal.integrated.macOptionIsMeta 为 true</summary></entry><entry><title type="html">Redis内存模型</title><link href="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html" rel="alternate" type="text/html" title="Redis内存模型" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">&lt;h1 id=&quot;内存使用统计&quot;&gt;内存使用统计&lt;/h1&gt;
 
 &lt;h2 id=&quot;info-中常见属性说明&quot;&gt;info 中常见属性说明&lt;/h2&gt;
 
