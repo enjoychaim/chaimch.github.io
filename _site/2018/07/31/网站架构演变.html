@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="zh-Hans">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>函数式编程 - Chaim Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>网站架构演变 - Chaim Blog</title>
 
-<meta name="description" content="函数式编程思想将一大段代码拆分成函数, 通过函数来实现一层逻辑一层逻辑的调用, 使得复杂的任务被分解成简单的任务.是什么函数式编程就是一种抽象度很高的编程范式, 纯粹的函数式编程语言写的函数没有变量, 因此, 任意一个函数, 只要输入是确定的, 输出就是确定的, 这种存储的函数我们称之为没有副作用.而允许使用变量...">
-<link rel="canonical" href="http://localhost:4000/2018/07/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="1. 初始阶段的网站架构一般来讲，大型网站都是从小型网站发展而来，一开始的架构都比较简单，随着业务复杂和用户量的激增，才开始做很多架构上的改进。当它还是小型网站的时候，没有太多访客，一般来讲只需要一台服务器就够了，这时应用程序、数据库、文件等所有资源都在一台服务器上，网站架构如下图所示：2. 应用服务和数据服务分...">
+<link rel="canonical" href="http://localhost:4000/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -273,77 +273,103 @@
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>函数式编程</h1></header><span class="split-space">&nbsp;</span>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>网站架构演变</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="在 Github 上修改"
-            href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2018-07-25-函数式编程.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="函数式编程"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2018-07-31-网站架构演变.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="网站架构演变"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=functional">functional</a>
+                href="/archive.html?tag=web">web</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=programming">programming</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月25日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="functional:programming:2018-07-25">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-25T00:00:00+08:00">
-    <meta itemprop="keywords" content="functional,programming"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+                href="/archive.html?tag=architecture">architecture</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月31日</span>
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="web:architecture:2018-07-31">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-31T00:00:00+08:00">
+    <meta itemprop="keywords" content="web,architecture"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
-<div class="article__content" itemprop="articleBody"><h1 id="函数式编程">函数式编程</h1>
+<div class="article__content" itemprop="articleBody"><h2 id="1-初始阶段的网站架构">1. 初始阶段的网站架构</h2>
 
-<h2 id="思想">思想</h2>
+<p>一般来讲，大型网站都是从小型网站发展而来，一开始的架构都比较简单，随着业务复杂和用户量的激增，才开始做很多架构上的改进。当它还是小型网站的时候，没有太多访客，一般来讲只需要一台服务器就够了，这时应用程序、数据库、文件等所有资源都在一台服务器上，网站架构如下图所示：</p>
 
-<p>将一大段代码拆分成函数, 通过函数来实现一层逻辑一层逻辑的调用, 使得复杂的任务被分解成简单的任务.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/789C3F49-9401-4479-AE20-FD2EE26BFB87.png" alt="789C3F49-9401-4479-AE20-FD2EE26BFB87" /></p>
 
-<h2 id="是什么">是什么</h2>
-<p>函数式编程就是一种抽象度很高的编程范式, 纯粹的函数式编程语言写的函数没有变量, 因此, 任意一个函数, 只要输入是确定的, 输出就是确定的, 这种存储的函数我们称之为没有副作用.</p>
+<h2 id="2-应用服务和数据服务分离">2. 应用服务和数据服务分离</h2>
 
-<p>而允许使用变量的程序设计语言, 由于函数内部的变量状态不确定, 同样的输入, 可能得到不同的输出, 因此, 这种函数是有副作用的.</p>
+<p>随着网站业务的发展和用户量的增加，一台服务器就无法再满足需求了。大量用户访问导致访问速度越来越慢，而逐渐增加的数据也会导致存储空间不足。这时就需要将应用和数据分离，应用和数据分离后整个网站使用 3 台服务器：应用服务器、文件服务器和数据库服务器。这 3 台服务器对硬件资源的要求各不相同：</p>
 
-<h2 id="特点">特点</h2>
-<p>允许函数本身作为参数传入另一个函数, 还允许返回一个函数.</p>
+<ul>
+  <li>应用服务器业务逻辑，需要强大的CPU</li>
+  <li>数据库服务器对磁盘读写操作很多，需要更快的磁盘和更大的内存</li>
+  <li>文件服务器存储用户上传的文件，因此需要更大的磁盘空间</li>
+</ul>
 
-<h2 id="python-中函数式编程">Python 中函数式编程</h2>
-<p>python所支持的函数式编程并非纯函数式编程, 因为Python允许使用变量. 
-其次, Python所支持的函数式编程是具有函数式编程所具有的特点, 函数本身可作为参数传给另一个函数, 还允许返回一个函数, 最好的实践方式的体现其实就是Python中的装饰器以及高级函数(接受另一个函数作为参数的函数, map, reduce, filter, sorted)</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter中每一个元素</span><span class="p">,</span> <span class="n">并返回一个新的iter</span>
-<span class="nb">reduce</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter</span><span class="p">,</span> <span class="n">返回一个最后结果值</span>
-<span class="nb">filter</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter中每一个元素</span><span class="p">,</span> <span class="n">根据func的返回值是否为True来决定是否保留当前元素</span>
-<span class="nb">sorted</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">func</span><span class="p">)</span> <span class="n">将func作用于iter每个元素</span><span class="p">,</span> <span class="n">并将返回结果排序</span>
-</code></pre></div></div>
+<p>此时，网站系统的架构如下图所示：</p>
 
-<h2 id="闭包">闭包</h2>
-<p>内部函数可以引用外部函数的变量以及参数, 外部函数返回内部函数, 并且相关参数和变量都保存在返回函数中, 这种现象称之为闭包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/7EFDCD2B-7953-4870-9C84-4940451D2E3D.png" alt="7EFDCD2B-7953-4870-9C84-4940451D2E3D" /></p>
 
-<h2 id="匿名函数">匿名函数</h2>
-<p>匿名函数只能写一个表达式, 函数的结果就是该表达式的结果</p>
+<h2 id="3-使用缓存改善网站性能">3. 使用缓存改善网站性能</h2>
 
-<h2 id="装饰器">装饰器</h2>
-<p>装饰器其实就是在代码运行期间动态增加功能的方式, 本质上就是一个返回函数的高阶函数</p>
+<p>随着用户再增加，网站又会一次面临挑战：数据库压力太大导致整站访问效率再此下降，用户体验受到影响。一个网站，往往 80% 的业务访问集中在 20% 的数据上，比如微博请求量最多的肯定是那些千万级粉丝的大 V 的微博，而几乎没有人关注的你的首页，除了自己想起来之外根本不会被打开。既然大部分业务访问集中在一小部分数据上，那就把这一小部分数据先提前缓存在内存中，而不是每次都去数据库读取，这样就可以减少数据库的访问压力，从而提高整个网站的访问速度。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">functools</span>
+<p>网站使用的缓存一般分为缓存到应用服务器或者缓存在专门的分布式缓存服务器。缓存到应用服务器自己的访问速度快很多，但是受自身内存限制，往往不太适用。远程分布式缓存使用一个集群专门负责缓存服务，当内存不够还可以轻松得动态扩容。</p>
 
-<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>        <span class="c1"># 实际上就是将func的属性(name等等)复制给下面函数的返回函数
-</span>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="err">‘</span><span class="n">call</span> <span class="p">{}</span><span class="err">’</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/71CF3DA7-539D-44EA-8C1B-019230BC8641.png" alt="71CF3DA7-539D-44EA-8C1B-019230BC8641" /></p>
 
-<span class="c1"># @log等同于log(xx) xx为被装饰的函数
-</span>
-<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="err">‘</span><span class="n">call</span> <span class="p">{}</span><span class="err">’</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">wrapper</span>
-    <span class="k">return</span> <span class="n">decorator</span>
+<h2 id="4-使用应用服务器集群改善网站的并发处理能力">4. 使用应用服务器集群改善网站的并发处理能力</h2>
 
-<span class="c1"># @log等同于log(yy)(xx)  yy为装饰时候传入的参数, xx为被装饰的函数
-</span></code></pre></div></div>
+<p>使用缓存后，数据访问压力得到了缓解，但是单一应用服务器能够处理的请求连接有限，在网站访问高峰期，应用服务器就成了整个网站的效率瓶颈。使用分布式集群是网站解决高并发、海量数据问题的常用手段。当一台服务器的处理能力和存储空间不足时，不要尝试去更换更强大的服务器，对大型网站而言，多么强大的服务器，都满足不了网站持续增长的业务需求。这种情况下，更恰当的做法是增加一台服务器分担原有服务器的访问及存储压力。 对网站架构而言，只要能通过增加一台服务器的方式改善负载压力，就可以以同样的方式持续增加服务器不断改善系统性能，从而实现系统的可伸缩性。应用服务器实现集群是网站可伸缩架构设计中较为简单成熟的一种，如下图所示：</p>
 
-</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2018-07-25T00:00:00+08:00"><!-- start custom article footer snippet -->
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/9C27D7BD-5526-4981-8748-FD5C9D706976.png" alt="9C27D7BD-5526-4981-8748-FD5C9D706976" /></p>
+
+<p>通过负载均衡调度服务器，可以将来自用户浏览器的访问请求分发到应用服务器集群中的任何一台服务器上，如果有更多用户，就在集群中加入更多的应用服务器，使应用服务器的压力不再成为整个网站的瓶颈。</p>
+
+<h2 id="5-数据库读写分离">5. 数据库读写分离</h2>
+
+<p>网站在使用缓存后，使对大部分数据读操作访问都可以不通过数据库就能完成，但是仍有一部分读操作（缓存访问不命中、缓存过期）和全部的写操作都需要访问数据库，在网站的用户达到一定规模后，数据库因为负载压力过高而成为网站的瓶颈。 目前大部分的主流数据库都提供主从热备功能，通过配置两台数据库主从关系，可以将一台数据库服务器的数据更新同步到另一台服务器上。网站利用数据库的这一功能，实现数据库读写分离，从而改善数据库负载压力。如下图所示：</p>
+
+<p>应用服务器在写数据的时候，访问主数据库，主数据库通过主从复制机制将数据更新同步到从数据库，这样当应用服务器读数据的时候，就可以通过从数据库获得数据。为了便于应用程序访问读写分离后的数据库，通常在应用服务器端使用专门的数据访问模块，使数据库读写分离对应用透明。</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/A647240E-55B3-43BA-89E3-FF7C63C152F8.png" alt="A647240E-55B3-43BA-89E3-FF7C63C152F8" /></p>
+
+<h2 id="6-使用反向代理和-cdn-加速网站响应">6. 使用反向代理和 CDN 加速网站响应</h2>
+
+<p>随着网站业务不断发展，用户规模越来越大，由于中国复杂的网络环境，不同地区的用户访问网站时，速度差别也极大。有研究表明，网站访问延迟和用户流失率正相关，网站访问越慢，用户越容易失去耐心而离开。为了提供更好的用户体验，留住用户，网站需要加速网站访问速度。主要手段有使用 CDN 和反向代理。如下图所示：</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/6B0993D5-E8B7-40AB-BFB1-5D31483ADB15.png" alt="6B0993D5-E8B7-40AB-BFB1-5D31483ADB15" /></p>
+
+<h2 id="7-使用分布式文件系统和分布式数据库系统">7. 使用分布式文件系统和分布式数据库系统</h2>
+
+<p>任何强大的单一服务器都满足不了大型网站持续增长的业务需求。数据库经过读写分离后，从一台服务器拆分成两台服务器，但是随着网站业务的发展依然不能满足需求，这时需要使用分布式数据库。文件系统也一样，需要使用分布式文件系统。如下图所示：</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/CA010735-5F24-42D6-9006-77DF99F050C8.png" alt="CA010735-5F24-42D6-9006-77DF99F050C8" /></p>
+
+<p>分布式数据库是网站数据库拆分的最后手段，只有在单表数据规模非常庞大的时候才使用。不到不得已时，网站更常用的数据库拆分手段是业务分库，将不同业务的数据部署在不同的物理服务器上。</p>
+
+<h2 id="8-使用-nosql-和搜索引擎">8. 使用 NoSQL 和搜索引擎</h2>
+
+<p>随着网站业务越来越复杂，对数据存储和检索的需求也越来越复杂，网站需要采用一些非关系数据库技术如 NoSQL 和非数据库查询技术如搜索引擎。如下图所示:</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/4C010742-FB47-40A1-97EB-73A08B456BDC.png" alt="4C010742-FB47-40A1-97EB-73A08B456BDC" /></p>
+
+<p>NoSQL 和搜索引擎都是源自互联网的技术手段，对可伸缩的分布式特性具有更好的支持。应用服务器则通过一个统一数据访问模块访问各种数据，减轻应用程序管理诸多数据源的麻烦。</p>
+
+<h2 id="9-业务拆分">9. 业务拆分</h2>
+
+<p>大型网站为了应对日益复杂的业务场景，通过使用分而治之的手段将整个网站业务分成不同的产品线。如大型购物交易网站都会将首页、商铺、订单、买家、卖家等拆分成不同的产品线，分归不同的业务团队负责。</p>
+
+<p>具体到技术上，也会根据产品线划分，将一个网站拆分成许多不同的应用，每个应用独立部署。应用之间可以通过一个超链接建立关系（在首页上的导航链接每个都指向不同的应用地址），也可以通过消息队列进行数据分发，当然最多的还是通过访问同一个数据存储系统来构成一个关联的完整系统，如下图所示：</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/B5A776EC-5D6D-4DBA-B54F-0E896D92CA62.png" alt="B5A776EC-5D6D-4DBA-B54F-0E896D92CA62" /></p>
+
+<h2 id="10-分布式服务">10. 分布式服务</h2>
+
+<p>随着业务拆分越来越小，存储系统越来越庞大，应用系统的整体复杂度呈指数级增加，部署维护越来越困难。由于所有应用要和所有数据库系统连接，在数万台服务器规模的网站中，这些连接的数目是服务器规模的平方，导致数据库连接资源不足，拒绝服务。</p>
+
+<p>既然每一个应用系统都需要执行许多相同的业务操作，比如用户管理、商品管理等，那么可以将这些共用的业务提取出来，独立部署。由这些可复用的业务连接数据库，提供共用业务服务，而应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作。如下图所示：</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/5299A1F8-B2AA-4D75-A447-9E0D9B767818.png" alt="5299A1F8-B2AA-4D75-A447-9E0D9B767818" /></p>
+</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2018-07-31T00:00:00+08:00"><!-- start custom article footer snippet -->
 
 
 
@@ -381,7 +407,7 @@
       </a>
     </p>
   </div></div></footer>
-<div class="article__section-navigator clearfix"><div class="next"><span>下篇</span><a href="/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html">网站架构演变</a></div></div></div>
+<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2018/07/25/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B.html">函数式编程</a></div><div class="next"><span>下篇</span><a href="/2020/08/04/HelloWold.html">Hello World</a></div></div></div>
 
 </div>
 
