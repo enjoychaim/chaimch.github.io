@@ -1,7 +1,7 @@
 ---
 title: Mac禁用option组合键特殊字符.md
 tags: mac option
-key: "mac:option:20200804"
+key: "mac:option:20200807"
 ---
 
 # Iterm2 中
