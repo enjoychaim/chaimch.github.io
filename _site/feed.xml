@@ -1,5 +1,184 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-06T19:37:53+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
-</subtitle><author><name>Chaim</name></author><entry><title type="html">Hello World</title><link href="http://localhost:4000/2020/08/04/HelloWold.html" rel="alternate" type="text/html" title="Hello World" /><published>2020-08-04T00:00:00+08:00</published><updated>2020-08-04T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/04/HelloWold</id><content type="html" xml:base="http://localhost:4000/2020/08/04/HelloWold.html">&lt;h1 id=&quot;h1&quot;&gt;H1&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-07T11:10:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
+</subtitle><author><name>Chaim</name></author><entry><title type="html">Redis内存模型</title><link href="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html" rel="alternate" type="text/html" title="Redis内存模型" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">&lt;h1 id=&quot;内存使用统计&quot;&gt;内存使用统计&lt;/h1&gt;
+
+&lt;h2 id=&quot;info-中常见属性说明&quot;&gt;info 中常见属性说明&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;属性名&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;属性说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Redis 分配器分配的内存总量(单位字节), 包含 swap&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_human&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;以可读方式返回 used_memory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_rss&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Redis 进程占操作系统的内存总量(单位字节),  跟top 或 ps 看到的一致&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_peak&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;内存使用的最大值, 即 used_memory 的峰值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_peak_human&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;以可读方式返回used_memory_peak&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_lua&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Lua 引擎所消耗的内存大小&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;mem_fragmentation_ratio&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;used_memory_rss / used_memory 比值, 表示内存碎片率&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;mem_allocator&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Redis 所使用的内存分配器, 默认为 jemalloc&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;属性说明补充&quot;&gt;属性说明补充&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;used_memory 是 redis 使用的实际使用的内存总量, 因此被内存碎片浪费掉的内存不包含在内&lt;/li&gt;
+  &lt;li&gt;mem_fragmentation_ratio一般大于 1, 业界内认为一般在 1.03 左右是健康水平.&lt;/li&gt;
+  &lt;li&gt;mem_fragmentation_ratio 的值越大, 内存碎片的比例越大&lt;/li&gt;
+  &lt;li&gt;mem_fragmentation_ratio &amp;lt; 1 时候, 一般是使用了 swap 导致的&lt;/li&gt;
+  &lt;li&gt;当 redis 无数据时候或数据很少时候, used_memory_rss 比 used_memory 大很多, 碎片率暂无参考价值&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;内存消耗划分&quot;&gt;内存消耗划分&lt;/h1&gt;
+
+&lt;h2 id=&quot;实际占用内存组成&quot;&gt;实际占用内存组成&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;redis 自身进程内存&lt;/li&gt;
+  &lt;li&gt;对象内存&lt;/li&gt;
+  &lt;li&gt;缓冲内存&lt;/li&gt;
+  &lt;li&gt;内存碎片&lt;/li&gt;
+  &lt;li&gt;子进程内存消耗&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;redis-自身进程内存&quot;&gt;redis 自身进程内存&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;空 redis 进程自身消耗的内存
+    &lt;ol&gt;
+      &lt;li&gt;docker 容器版本, used_memory_rss一般为 9MB 左右&lt;/li&gt;
+      &lt;li&gt;进程版本, used_memory_rss 一般为为3MB 左右&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;故, Redis 自身进程内存可以忽略不计&lt;/li&gt;
+  &lt;li&gt;由于不是 jemalloc 分配的内存, 因此不会统计在 used_memory 中&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;## 对象内存&lt;/p&gt;
+
+&lt;p&gt;用户数据再 redis 内占用的内存&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;由于是 k-v 结构, 故每个键值对的内存消耗为: sizeof(k) + sizeof(v)&lt;/li&gt;
+  &lt;li&gt;键为字符串, 建议避免使用过长的键&lt;/li&gt;
+  &lt;li&gt;值为字符串, 列表, 哈希, 集合, 有序集合这五种, 其中 Bitmaps 和 HyperLog 使用字符串实现, GEO 使用有序集合实现&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;缓冲内存&quot;&gt;缓冲内存&lt;/h2&gt;
+
+&lt;p&gt;主要包含: &lt;strong&gt;客户端缓冲&lt;/strong&gt;, &lt;strong&gt;复制积压缓冲区&lt;/strong&gt;,  &lt;strong&gt;AOF 缓冲区&lt;/strong&gt;. 该部分内存由 jemalloc 分配, 因此会包含在 used_memory 中&lt;/p&gt;
+
+&lt;h3 id=&quot;客户端缓冲&quot;&gt;客户端缓冲&lt;/h3&gt;
+
+&lt;p&gt;主要包含普通客户端, 从客户端, 订阅客户端. 所有接入到 Redis 服务器 TCP 连接的输入输出缓冲, 因此有时候也被称为输入输出缓冲区&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;输入缓冲无法控制, 最大为 1G&lt;/li&gt;
+  &lt;li&gt;输出缓冲通过参数 client-output-buffer-limit 控制, 默认值如下&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit replica 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;普通客户端主要指除了复制和订阅的客户端之外的所有连接. 默认未做限制, 因为普通客户端的内存消耗可以忽略不计. 但是当有大量慢连接客户端时候, 消耗就很大, 例如客户端执行 monitor 之类的需要输出大量数据时候, 很容易造成 redis 服务器的内存突然飙升. 一般会调整 maxclients 来限制&lt;/li&gt;
+  &lt;li&gt;从客户端主要用于主从复制, 主节点会单独建立一条连接用于命令复制. 当主从延迟很高或者挂载过多的从节点时候, 会导致该部分占用很大. 因此推荐主从不跨异地, 从节点不多于 2 个&lt;/li&gt;
+  &lt;li&gt;订阅客户端主要用于发布订阅功能, 该功能会使用单独的输出缓冲区. 当生产消息快于消费速度时候, 输出缓冲区的积压会造成缓冲区空间的益处.&lt;/li&gt;
+  &lt;li&gt;输入输出缓冲区在大流量的情况下, 容易失控, 推荐做一定的监控.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;复制积压缓冲区&quot;&gt;复制积压缓冲区&lt;/h3&gt;
+
+&lt;p&gt;该缓冲区是在 2.8 版本以后提供的恶一个可重用的固定大小的缓冲区, 用于实现部分复制功能, 默认值如下:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;repl-backlog-size 1mb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;所用的从节点会共用才缓冲区, 因此可以适当调大, 一般会推荐 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;100MB&lt;/code&gt;的样子, 可以避免全量复制的情况&lt;/p&gt;
+
+&lt;h3 id=&quot;aof-缓冲区&quot;&gt;AOF 缓冲区&lt;/h3&gt;
+
+&lt;p&gt;该部分空间用于 redis 重写期间, 保存最近写入的命令. 该部分无法控制, 消耗的内存取决于 AOF 重写时间和写入的命令量, 大部分情况下占用都很小.&lt;/p&gt;
+
+&lt;h2 id=&quot;内存碎片&quot;&gt;内存碎片&lt;/h2&gt;
+
+&lt;p&gt;默认采用的是 jemalloc 的分配器, 编译时可选 glibc, tcmalloc 的分配器. jemalloc 一般讲系统内存划分为小, 大, 巨大三个范围. 每个范围又划分更多更小的内存单位, 如下所示:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;小   [8byte] [16byte] [32byte] [64byte] ...
+大   [4KB] [8KB] [12KB] [16KB] ...
+巨大 [4MB] [8MB] [12MB] [16MB] ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;当需要保存 5KB 的对象时候, jemalloc 可能会采用 8KB 的块存储, 而剩下的 3KB 空间就变为内存碎片不能再分配给其他对象存储, 由此产生了内存碎片. &lt;strong&gt;此时的 5KB 被纳入到 used_memory 的统计范围内, 操作系统上表现为 redis 消耗了 8KB 的内存.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;高碎片率的原因&quot;&gt;高碎片率的原因&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;针对已存在的 key 频繁执行更新操作&lt;/li&gt;
+  &lt;li&gt;大量过期键删除, 释放的空间未能得到使用&lt;/li&gt;
+  &lt;li&gt;存储的数据长短差异较大&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;高碎片率解决版本&quot;&gt;高碎片率解决版本&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;数据对齐, 尽量使用数字类型或者固定长度的字符串&lt;/li&gt;
+  &lt;li&gt;安全重启, 主从切换安全重启&lt;/li&gt;
+  &lt;li&gt;redis4 以上设置 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config set activedefrag yes&lt;/code&gt; 来保证自动清理&lt;/li&gt;
+  &lt;li&gt;redis4 以上可以手动执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memory purge&lt;/code&gt; 来清理内存碎片&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;子进程内存消耗&quot;&gt;子进程内存消耗&lt;/h2&gt;
+
+&lt;p&gt;子进程内存消耗多指的是 AOF/RDB 过程创建的子进程所带来的内存消耗. 由于 linux 存在 copy-on-write 的机制, 因此父子进程会共享相同的物理内存页, 因而不需要 2 倍的物理内存来完成重写.&lt;/p&gt;
+
+&lt;h1 id=&quot;内存管理&quot;&gt;内存管理&lt;/h1&gt;
+
+&lt;p&gt;redis 中使用 maxmemory 的参数控制最大可用内存. 主要目的如下:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;当内存超出 maxmemory 时候, 可以使用 LRU 等策略释放空间&lt;/li&gt;
+  &lt;li&gt;避免超过服务器物理内存&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;前方雷点请注意&quot;&gt;前方雷点请注意&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;maxmemory 控制的是 redis 实际使用的内存量, 也就是 used_memory 统计项对应的内存&lt;/li&gt;
+  &lt;li&gt;由于被浪费的内存未被纳入到 used_memory 的统计内, 因此实际消耗的内存会比 maxmemory 设置的还要大, 真实消耗的内存可粗略估计为&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;maxmemory * mem_fragmentation_ratio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Chaim</name></author><category term="redis" /><category term="memory" /><summary type="html">内存使用统计 info 中常见属性说明 属性名 属性说明 used_memory Redis 分配器分配的内存总量(单位字节), 包含 swap used_memory_human 以可读方式返回 used_memory used_memory_rss Redis 进程占操作系统的内存总量(单位字节), 跟top 或 ps 看到的一致 used_memory_peak 内存使用的最大值, 即 used_memory 的峰值 used_memory_peak_human 以可读方式返回used_memory_peak used_memory_lua Lua 引擎所消耗的内存大小 mem_fragmentation_ratio used_memory_rss / used_memory 比值, 表示内存碎片率 mem_allocator Redis 所使用的内存分配器, 默认为 jemalloc 属性说明补充 used_memory 是 redis 使用的实际使用的内存总量, 因此被内存碎片浪费掉的内存不包含在内 mem_fragmentation_ratio一般大于 1, 业界内认为一般在 1.03 左右是健康水平. mem_fragmentation_ratio 的值越大, 内存碎片的比例越大 mem_fragmentation_ratio &amp;lt; 1 时候, 一般是使用了 swap 导致的 当 redis 无数据时候或数据很少时候, used_memory_rss 比 used_memory 大很多, 碎片率暂无参考价值 内存消耗划分 实际占用内存组成 redis 自身进程内存 对象内存 缓冲内存 内存碎片 子进程内存消耗 redis 自身进程内存 空 redis 进程自身消耗的内存 docker 容器版本, used_memory_rss一般为 9MB 左右 进程版本, used_memory_rss 一般为为3MB 左右 故, Redis 自身进程内存可以忽略不计 由于不是 jemalloc 分配的内存, 因此不会统计在 used_memory 中 ## 对象内存 用户数据再 redis 内占用的内存 由于是 k-v 结构, 故每个键值对的内存消耗为: sizeof(k) + sizeof(v) 键为字符串, 建议避免使用过长的键 值为字符串, 列表, 哈希, 集合, 有序集合这五种, 其中 Bitmaps 和 HyperLog 使用字符串实现, GEO 使用有序集合实现 缓冲内存 主要包含: 客户端缓冲, 复制积压缓冲区, AOF 缓冲区. 该部分内存由 jemalloc 分配, 因此会包含在 used_memory 中 客户端缓冲 主要包含普通客户端, 从客户端, 订阅客户端. 所有接入到 Redis 服务器 TCP 连接的输入输出缓冲, 因此有时候也被称为输入输出缓冲区 输入缓冲无法控制, 最大为 1G 输出缓冲通过参数 client-output-buffer-limit 控制, 默认值如下 client-output-buffer-limit normal 0 0 0 client-output-buffer-limit replica 256mb 64mb 60 client-output-buffer-limit pubsub 32mb 8mb 60 普通客户端主要指除了复制和订阅的客户端之外的所有连接. 默认未做限制, 因为普通客户端的内存消耗可以忽略不计. 但是当有大量慢连接客户端时候, 消耗就很大, 例如客户端执行 monitor 之类的需要输出大量数据时候, 很容易造成 redis 服务器的内存突然飙升. 一般会调整 maxclients 来限制 从客户端主要用于主从复制, 主节点会单独建立一条连接用于命令复制. 当主从延迟很高或者挂载过多的从节点时候, 会导致该部分占用很大. 因此推荐主从不跨异地, 从节点不多于 2 个 订阅客户端主要用于发布订阅功能, 该功能会使用单独的输出缓冲区. 当生产消息快于消费速度时候, 输出缓冲区的积压会造成缓冲区空间的益处. 输入输出缓冲区在大流量的情况下, 容易失控, 推荐做一定的监控. 复制积压缓冲区 该缓冲区是在 2.8 版本以后提供的恶一个可重用的固定大小的缓冲区, 用于实现部分复制功能, 默认值如下: repl-backlog-size 1mb 所用的从节点会共用才缓冲区, 因此可以适当调大, 一般会推荐 100MB的样子, 可以避免全量复制的情况 AOF 缓冲区 该部分空间用于 redis 重写期间, 保存最近写入的命令. 该部分无法控制, 消耗的内存取决于 AOF 重写时间和写入的命令量, 大部分情况下占用都很小. 内存碎片 默认采用的是 jemalloc 的分配器, 编译时可选 glibc, tcmalloc 的分配器. jemalloc 一般讲系统内存划分为小, 大, 巨大三个范围. 每个范围又划分更多更小的内存单位, 如下所示: 小 [8byte] [16byte] [32byte] [64byte] ... 大 [4KB] [8KB] [12KB] [16KB] ... 巨大 [4MB] [8MB] [12MB] [16MB] ... 当需要保存 5KB 的对象时候, jemalloc 可能会采用 8KB 的块存储, 而剩下的 3KB 空间就变为内存碎片不能再分配给其他对象存储, 由此产生了内存碎片. 此时的 5KB 被纳入到 used_memory 的统计范围内, 操作系统上表现为 redis 消耗了 8KB 的内存. 高碎片率的原因 针对已存在的 key 频繁执行更新操作 大量过期键删除, 释放的空间未能得到使用 存储的数据长短差异较大 高碎片率解决版本 数据对齐, 尽量使用数字类型或者固定长度的字符串 安全重启, 主从切换安全重启 redis4 以上设置 config set activedefrag yes 来保证自动清理 redis4 以上可以手动执行memory purge 来清理内存碎片 子进程内存消耗 子进程内存消耗多指的是 AOF/RDB 过程创建的子进程所带来的内存消耗. 由于 linux 存在 copy-on-write 的机制, 因此父子进程会共享相同的物理内存页, 因而不需要 2 倍的物理内存来完成重写. 内存管理 redis 中使用 maxmemory 的参数控制最大可用内存. 主要目的如下: 当内存超出 maxmemory 时候, 可以使用 LRU 等策略释放空间 避免超过服务器物理内存 前方雷点请注意 maxmemory 控制的是 redis 实际使用的内存量, 也就是 used_memory 统计项对应的内存 由于被浪费的内存未被纳入到 used_memory 的统计内, 因此实际消耗的内存会比 maxmemory 设置的还要大, 真实消耗的内存可粗略估计为 maxmemory * mem_fragmentation_ratio</summary></entry><entry><title type="html">Hello World</title><link href="http://localhost:4000/2020/08/04/HelloWold.html" rel="alternate" type="text/html" title="Hello World" /><published>2020-08-04T00:00:00+08:00</published><updated>2020-08-04T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/04/HelloWold</id><content type="html" xml:base="http://localhost:4000/2020/08/04/HelloWold.html">&lt;h1 id=&quot;h1&quot;&gt;H1&lt;/h1&gt;
 &lt;p&gt;h1 description&lt;/p&gt;
 
 &lt;h2 id=&quot;h2&quot;&gt;H2&lt;/h2&gt;
