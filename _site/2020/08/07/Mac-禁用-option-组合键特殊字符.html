@@ -1,11 +1,10 @@
 <!DOCTYPE html><html lang="zh-Hans">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>主页 - Chaim Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Mac禁用option组合键特殊字符.md - Chaim Blog</title>
 
-<meta name="description" content="Your Site Description
-">
-<link rel="canonical" href="http://localhost:4000/"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="Iterm2 中操作步骤  Preference  Profiles  default  keys  set option 为 Esc+vscode 中(解决打开 terminal 时候使用 option 仍冲突)操作步骤  cmd + shif +p  open settings (ui)  terminal....">
+<link rel="canonical" href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -256,7 +255,7 @@
 </head>
   <body>
     <div class="root" data-is-touch="false">
-      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport cell cell--auto">
+      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport has-aside cell cell--auto">
 
       <div class="page__main-inner"><div class="page__header d-print-none"><header class="header"><div class="main">
       <div class="header__title">
@@ -268,105 +267,17 @@
   </header>
 </div><div class="page__content"><div class ="main"><div class="grid grid--reverse">
 
-              <div class="col-aside d-print-none js-col-aside"></div>
+              <div class="col-aside d-print-none js-col-aside"><aside class="page__aside js-page-aside"><div class="toc-aside js-toc-root"></div>
+</aside></div>
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>主页</h1></header><meta itemprop="headline" content="主页"><meta itemprop="author" content="Chaim"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/07/Vim-Cheatsheet.html"><h2 itemprop="headline" class="item__header">Vim Cheatsheet</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">命令执行格式
-
-(command) (number) (text object)
-(number) (command) (text object) 
-
-
-基础操作
-
-ZZ 或 :wq                 保存并退出
-:e!                       恢复到上一次存储的文件内容
-:w pathname/filename      写入到其他文件中
-:rf pathname/filename     删除其他文件
-:!ls pathname             查看其他目录使用情况
-:sh -&gt; ctrl-d 或 exit     创建对应的 shell 执行其任务后再返回
-ctrl-z -&gt; fg              暂停 vi 后执行...</div><p><a href="/2020/08/07/Vim-Cheatsheet.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=vim">vim</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=cheatsheet">cheatsheet</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月07日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="vim:cheatsheet:20200807">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-07T00:00:00+08:00">
-    <meta itemprop="keywords" content="vim,cheatsheet"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html"><h2 itemprop="headline" class="item__header">Redis内存模型</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">内存使用统计
-
-info 中常见属性说明
-
-
-  
-    
-      属性名
-      属性说明
-    
-  
-  
-    
-      used_memory
-      Redis 分配器分配的内存总量(单位字节), 包含 swap
-    
-    
-      used_memory_human
-      以可读方式返回 used_memory
-    
-    
-      used_memory_rss
-      Redis 进程占操作系统的内存总量(单位字节),  跟top 或 ps 看到的一致
-    
-    
-      used_memory_peak
-      内存使用的最大值, 即 used_memory 的峰值
-    
-    
-     ...</div><p><a href="/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=redis">redis</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=memory">memory</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月07日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="redis:memory:20200807">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-07T00:00:00+08:00">
-    <meta itemprop="keywords" content="redis,memory"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html"><h2 itemprop="headline" class="item__header">Mac禁用option组合键特殊字符.md</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">Iterm2 中
-
-操作步骤
-
-
-  Preference
-  Profiles
-  default
-  keys
-  set option 为 Esc+
-
-
-
-
-vscode 中(解决打开 terminal 时候使用 option 仍冲突)
-
-操作步骤
-
-
-  cmd + shif +p
-  open settings (ui)
-
-
-
-
-
-  terminal.integrated.macOptionIsMeta 为 true</div><p><a href="/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Mac禁用option组合键特殊字符.md</h1></header><span class="split-space">&nbsp;</span>
+          <a class="edit-on-github"
+            title="在 Github 上修改"
+            href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2020-08-07-Mac 禁用 option 组合键特殊字符.md">
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Mac禁用option组合键特殊字符.md"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
                 href="/archive.html?tag=mac">mac</a>
             </li><li>
@@ -374,53 +285,106 @@ vscode 中(解决打开 terminal 时候使用 option 仍冲突)
                 href="/archive.html?tag=option">option</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月07日</span>
             </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="mac:option:20200807">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-07T00:00:00+08:00">
-    <meta itemprop="keywords" content="mac,option"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html"><h2 itemprop="headline" class="item__header">AWS 本地采用 ECR 镜像进行调试</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">前置条件
+    <meta itemprop="keywords" content="mac,option"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+
+<!-- end custom article top snippet -->
+<div class="article__content" itemprop="articleBody"><h1 id="iterm2-中">Iterm2 中</h1>
+
+<h2 id="操作步骤">操作步骤</h2>
+
+<ol>
+  <li>Preference</li>
+  <li>Profiles</li>
+  <li>default</li>
+  <li>keys</li>
+  <li>set option 为 Esc+</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623142907502.png" alt="image-20200623142907502" /></p>
+
+<h1 id="vscode-中解决打开-terminal-时候使用-option-仍冲突">vscode 中(解决打开 terminal 时候使用 option 仍冲突)</h1>
+
+<h2 id="操作步骤-1">操作步骤</h2>
+
+<ol>
+  <li>cmd + shif +p</li>
+  <li>open settings (ui)</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143042248.png" alt="image-20200623143042248" /></p>
+
+<ol>
+  <li>terminal.integrated.macOptionIsMeta 为 true</li>
+</ol>
+
+<p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/image-20200623143131118.png" alt="image-20200623143131118" /></p>
+</div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-07T00:00:00+08:00"><!-- start custom article footer snippet -->
 
 
-  具备 aws cli权限
-  本地配置 docker环境
 
 
-操作步骤
+    <div class="article__content my-3">
+      <hr />
+      <p><strong>你的支持是我的动力。你可以通过以下方式支持我：</strong></p>
+      <ul>
+        <li>给该项目点赞&nbsp;<a style="vertical-align: text-bottom;" href="https://github.com/chaimch/chaimch.github.io.git/">
+          <img src="https://img.shields.io/github/stars/chaimch/chaimch.github.io.svg?label=Stars&style=social" alt="给该项目点赞" />
+        </a></li>
+        <li>关注我的 Github&nbsp;<a style="vertical-align: text-bottom;"  href="https://github.com/chaimch/">
+          <img src="https://img.shields.io/github/followers/chaimch.svg?label=Follow&style=social" alt="关注我的 Github" />
+        </a></li>
+        <li>打赏</li>
+      </ul>
+      <table>
+        <thead><tr>
+          <th>微信支付</th>
+          <th>支付宝</th>
+        </tr></thead>
+        <tbody><tr>
+          <td><img style="max-widht: 150px; max-height: 150px" src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/4htwsH.png" alt="微信支付二维码" /></td>
+          <td><img style="max-widht: 150px; max-height: 150px" src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/T3Xzvi.jpg" alt="支付宝二维码" /></td>
+        </tr></tbody>
+      </table>
+    </div>
 
+<!-- end custom article footer snippet -->
+<div class="article__subscribe"><div class="subscribe"><i class="fas fa-rss"></i> <a type="application/rss+xml" href="/feed.xml">订阅</a></div>
+</div><div class="article__license"><div class="license">
+    <p>本文遵守 <a itemprop="license" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> 许可协议。
+      <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+        <img alt="Attribution-NonCommercial 4.0 International" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+      </a>
+    </p>
+  </div></div></footer>
+<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html">AWS 本地采用 ECR 镜像进行调试</a></div><div class="next"><span>下篇</span><a href="/2020/08/07/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.html">Redis内存模型</a></div></div></div>
 
-  查看 ci 过程，获取镜像地址，例如 image xxx.dkr.ecr.us-east-1.amazonaws.com/ci-base/java8/v1
-  获取 ecr 授权密码，cmd 中输入 aws ecr get-login-password
-  本地 docker 授权 ecr，cmd 中输入 docker login -u AWS xxx.dkr.ecr.us-east-1.amazonaws.com</div><p><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=aws">aws</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=ecr">ecr</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=docker">docker</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月04日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="AWSECR:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00">
-    <meta itemprop="keywords" content="aws,ecr,docker"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/04/HelloWold.html"><h2 itemprop="headline" class="item__header">Hello World</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">H1
-h1 description
+</div>
 
-H2
-h2 description
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
 
-H3
-h3 description</div><p><a href="/2020/08/04/HelloWold.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月04日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="HelloWold:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00"></div>
-      </article></div>
-</div><div class="layout--home"></div>
-<script>/*(function () {
-
-})();*/
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor d-print-none" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();
 </script>
-
-
-
 </div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
 
 <!-- end custom main bottom snippet -->
@@ -957,6 +921,68 @@ window.Lazyload.js([SOURCES.jquery, PAHTS.search_js], function() {
 /*(function () {
 
 })();*/
+</script><script>
+  /* toc must before affix, since affix need to konw toc' height. */(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  var TOC_SELECTOR = window.TEXT_VARIABLES.site.toc.selectors;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window);
+    var $articleContent = $('.js-article-content');
+    var $tocRoot = $('.js-toc-root'), $col2 = $('.js-col-aside');
+    var toc;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+    var hasToc = $articleContent.find(TOC_SELECTOR).length > 0;
+
+    function disabled() {
+      return $col2.css('display') === 'none' || !hasToc;
+    }
+
+    tocDisabled = disabled();
+
+    toc = $tocRoot.toc({
+      selectors: TOC_SELECTOR,
+      container: $articleContent,
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      tocDisabled = disabled();
+      toc && toc.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $window = $(window), $pageFooter = $('.js-page-footer');
+    var $pageAside = $('.js-page-aside');
+    var affix;
+    var tocDisabled = false;
+    var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+
+    affix = $pageAside.affix({
+      offsetBottom: $pageFooter.outerHeight(),
+      scrollTarget: hasSidebar ? '.js-page-main' : null,
+      scroller: hasSidebar ? '.js-page-main' : null,
+      scroll: hasSidebar ? $('.js-page-main').children() : null,
+      disabled: tocDisabled
+    });
+
+    $window.on('resize', window.throttle(function() {
+      affix && affix.setOptions({
+        disabled: tocDisabled
+      });
+    }, 100));
+
+    window.pageAsideAffix = affix;
+  });
+})();
 </script><script>
   window.Lazyload.js(['https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js', 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js'], function() {
     var $canvas = null, $this = null, _ctx = null, _text = '';
