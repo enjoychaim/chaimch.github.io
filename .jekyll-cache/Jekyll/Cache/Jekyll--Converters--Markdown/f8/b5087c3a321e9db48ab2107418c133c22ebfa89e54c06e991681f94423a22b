@@ -1,0 +1,56 @@
+I"�<h1 id="函数式编程">函数式编程</h1>
+
+<h2 id="思想">思想</h2>
+
+<p>将一大段代码拆分成函数, 通过函数来实现一层逻辑一层逻辑的调用, 使得复杂的任务被分解成简单的任务.</p>
+
+<h2 id="是什么">是什么</h2>
+<p>函数式编程就是一种抽象度很高的编程范式, 纯粹的函数式编程语言写的函数没有变量, 因此, 任意一个函数, 只要输入是确定的, 输出就是确定的, 这种存储的函数我们称之为没有副作用.</p>
+
+<p>而允许使用变量的程序设计语言, 由于函数内部的变量状态不确定, 同样的输入, 可能得到不同的输出, 因此, 这种函数是有副作用的.</p>
+
+<h2 id="特点">特点</h2>
+<p>允许函数本身作为参数传入另一个函数, 还允许返回一个函数.</p>
+
+<h2 id="python-中函数式编程">Python 中函数式编程</h2>
+<p>python所支持的函数式编程并非纯函数式编程, 因为Python允许使用变量. 
+其次, Python所支持的函数式编程是具有函数式编程所具有的特点, 函数本身可作为参数传给另一个函数, 还允许返回一个函数, 最好的实践方式的体现其实就是Python中的装饰器以及高级函数(接受另一个函数作为参数的函数, map, reduce, filter, sorted)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter中每一个元素</span><span class="p">,</span> <span class="n">并返回一个新的iter</span>
+<span class="nb">reduce</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter</span><span class="p">,</span> <span class="n">返回一个最后结果值</span>
+<span class="nb">filter</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span> <span class="n">将func作用于iter中每一个元素</span><span class="p">,</span> <span class="n">根据func的返回值是否为True来决定是否保留当前元素</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="nb">iter</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">func</span><span class="p">)</span> <span class="n">将func作用于iter每个元素</span><span class="p">,</span> <span class="n">并将返回结果排序</span>
+</code></pre></div></div>
+
+<h2 id="闭包">闭包</h2>
+<p>内部函数可以引用外部函数的变量以及参数, 外部函数返回内部函数, 并且相关参数和变量都保存在返回函数中, 这种现象称之为闭包</p>
+
+<h2 id="匿名函数">匿名函数</h2>
+<p>匿名函数只能写一个表达式, 函数的结果就是该表达式的结果</p>
+
+<h2 id="装饰器">装饰器</h2>
+<p>装饰器其实就是在代码运行期间动态增加功能的方式, 本质上就是一个返回函数的高阶函数</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>        <span class="c1"># 实际上就是将func的属性(name等等)复制给下面函数的返回函数
+</span>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="err">‘</span><span class="n">call</span> <span class="p">{}</span><span class="err">’</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="c1"># @log等同于log(xx) xx为被装饰的函数
+</span>
+<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="o">@</span><span class="n">functools</span><span class="p">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="err">‘</span><span class="n">call</span> <span class="p">{}</span><span class="err">’</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+
+<span class="c1"># @log等同于log(yy)(xx)  yy为装饰时候传入的参数, xx为被装饰的函数
+</span></code></pre></div></div>
+
+:ET
