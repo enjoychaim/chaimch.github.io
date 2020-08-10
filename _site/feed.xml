@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-10T12:13:37+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
-</subtitle><author><name>Chaim</name></author><entry><title type="html">Kubernates Evicted By ephemeral-storage</title><link href="http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html" rel="alternate" type="text/html" title="Kubernates Evicted By ephemeral-storage" /><published>2020-08-10T00:00:00+08:00</published><updated>2020-08-10T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/10/Kubernates%20Evicted%20By%20ephemeral-storage</id><content type="html" xml:base="http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">&lt;h2 id=&quot;报错如下&quot;&gt;报错如下&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-Hans"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="zh-Hans" /><updated>2020-08-10T18:07:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Chaim Blog</title><subtitle>Your Site Description
+</subtitle><author><name>Chaim</name></author><entry><title type="html">Kubernates Evicted By ephemeral-storage</title><link href="http://localhost:4000/2020/08/10/Golang-Context-%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3.html" rel="alternate" type="text/html" title="Kubernates Evicted By ephemeral-storage" /><published>2020-08-10T00:00:00+08:00</published><updated>2020-08-10T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/10/Golang%20Context%20%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3</id><content type="html" xml:base="http://localhost:4000/2020/08/10/Golang-Context-%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3.html">&lt;h2 id=&quot;报错如下&quot;&gt;报错如下&lt;/h2&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Type     Reason     Age                From                                     Message
   ----     ------     ----               ----                                     -------
@@ -23,7 +23,379 @@
             cpu: &quot;1500m&quot;
             memory: &quot;14.5Gi&quot;
             ephemeral-storage: &quot;10Gi&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Chaim</name></author><category term="kubernates" /><category term="evicted" /><summary type="html">报错如下 Type Reason Age From Message ---- ------ ---- ---- ------- Warning Unhealthy 52m kubelet, ip-172-30-200-182.ec2.internal Readiness probe failed: Get http://172.30.206.82:10902/-/ready: dial tcp 172.30.206.82:10902: connect: connection refused Normal Pulled 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Container image &quot;quay.io/thanos/thanos:v0.14.0&quot; already present on machine Normal Created 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Created container thanos Normal Started 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Started container thanos Warning Evicted 28m kubelet, ip-172-30-200-182.ec2.internal The node was low on resource: ephemeral-storage. Container prometheus was using 20Ki, which exceeds its request of 0. Container thanos was using 16Ki, which exceeds its request of 0. Normal Killing 28m kubelet, ip-172-30-200-182.ec2.internal Stopping container prometheus Normal Killing 28m kubelet, ip-172-30-200-182.ec2.internal Stopping container thanos 解决办法 resources: limits: cpu: &quot;1500m&quot; memory: &quot;14.5Gi&quot; ephemeral-storage: &quot;10Gi&quot; requests: cpu: &quot;1500m&quot; memory: &quot;14.5Gi&quot; ephemeral-storage: &quot;10Gi&quot;</summary></entry><entry><title type="html">Mac禁用option组合键特殊字符.md</title><link href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html" rel="alternate" type="text/html" title="Mac禁用option组合键特殊字符.md" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Mac%20%E7%A6%81%E7%94%A8%20option%20%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html">&lt;h1 id=&quot;iterm2-中&quot;&gt;Iterm2 中&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Chaim</name></author><category term="kubernates" /><category term="evicted" /><summary type="html">报错如下 Type Reason Age From Message ---- ------ ---- ---- ------- Warning Unhealthy 52m kubelet, ip-172-30-200-182.ec2.internal Readiness probe failed: Get http://172.30.206.82:10902/-/ready: dial tcp 172.30.206.82:10902: connect: connection refused Normal Pulled 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Container image &quot;quay.io/thanos/thanos:v0.14.0&quot; already present on machine Normal Created 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Created container thanos Normal Started 52m (x2 over 22h) kubelet, ip-172-30-200-182.ec2.internal Started container thanos Warning Evicted 28m kubelet, ip-172-30-200-182.ec2.internal The node was low on resource: ephemeral-storage. Container prometheus was using 20Ki, which exceeds its request of 0. Container thanos was using 16Ki, which exceeds its request of 0. Normal Killing 28m kubelet, ip-172-30-200-182.ec2.internal Stopping container prometheus Normal Killing 28m kubelet, ip-172-30-200-182.ec2.internal Stopping container thanos 解决办法 resources: limits: cpu: &quot;1500m&quot; memory: &quot;14.5Gi&quot; ephemeral-storage: &quot;10Gi&quot; requests: cpu: &quot;1500m&quot; memory: &quot;14.5Gi&quot; ephemeral-storage: &quot;10Gi&quot;</summary></entry><entry><title type="html">Golang Context 使用与理解</title><link href="http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html" rel="alternate" type="text/html" title="Golang Context 使用与理解" /><published>2020-08-10T00:00:00+08:00</published><updated>2020-08-10T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/10/Kubernates%20Evicted%20By%20ephemeral-storage</id><content type="html" xml:base="http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">&lt;h1 id=&quot;业务场景&quot;&gt;业务场景&lt;/h1&gt;
+
+&lt;p&gt;用户发出请求后, 点击了取消. 此时该请求会对应几个 goroutine, 一个获取身份信息, 一个获取 db 数据, 一个校验 token. 一旦请求被取消, 该请求涉及到的其他 goroutine 也应该被取消&lt;/p&gt;
+
+&lt;h1 id=&quot;实现方式&quot;&gt;实现方式&lt;/h1&gt;
+
+&lt;h2 id=&quot;原始的-demo-处理过程&quot;&gt;原始的 Demo 处理过程&lt;/h2&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;sync&quot;&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;time&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WaitGroup&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;worker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 如何接收外部命令实现退出&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 如何优雅的实现结束子goroutine&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;全局变量方式处理&quot;&gt;全局变量方式处理&lt;/h2&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;sync&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;time&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WaitGroup&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;// 全局变量方式存在的问题：&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// 1. 使用全局变量在跨包调用时不容易统一&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// 2. 如果worker中再启动goroutine，就不太好控制&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;worker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// sleep3秒以免程序过快退出&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;                 &lt;span class=&quot;c&quot;&gt;// 修改全局变量实现子goroutine的退出&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;通道解决方式&quot;&gt;通道解决方式&lt;/h2&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;sync&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;time&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WaitGroup&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// 管道方式存在的问题：&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// 1. 使用全局变量在跨包调用时不容易实现规范和统一，需要维护一个共用的channel&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;chan&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;worker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 等待接收上级通知&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;chan&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// sleep3秒以免程序过快退出&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}{}&lt;/span&gt;      &lt;span class=&quot;c&quot;&gt;// 给子goroutine发送退出信号&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exitChan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;官方推荐版本&quot;&gt;官方推荐版本&lt;/h2&gt;
+
+&lt;p&gt;只需要将 context 对象传入, 即可以解决多个 goroutine 的上下文问题&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;context&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;sync&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;time&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sync&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WaitGroup&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;worker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 等待上级通知&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cancel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WithCancel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cancel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// 通知子goroutine结束&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;wg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main done&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;context-是什么&quot;&gt;context 是什么&lt;/h1&gt;
+
+&lt;h2 id=&quot;官方定义&quot;&gt;官方定义&lt;/h2&gt;
+
+&lt;p&gt;Golang 1.7 之后加入了一个标准库 context. 该标准库定义为 Context 类型, 专门用于简化对于处理单个请求的多个 goroutine 之间与请求域的数据, 取消信号, 截止时间等相关操作, 这些操作往往涉及到调用多个 API.&lt;/p&gt;
+
+&lt;h3 id=&quot;网络请求使用背景&quot;&gt;网络请求使用背景&lt;/h3&gt;
+
+&lt;p&gt;如果有一个网络请求 request, 每个 request 都需要开启一个 goroutine 处理一些事情, 这些 goroutine 可能又会开启其他的 goroutine. 此时可以通过 context 来跟踪所有的 goroutine, 并且通过 context 来控制他们.&lt;/p&gt;
+
+&lt;h3 id=&quot;服务器程序使用背景&quot;&gt;服务器程序使用背景&lt;/h3&gt;
+
+&lt;p&gt;在 Go 服务器程序中, 每个请求都会有 goroutine 去处理. 然而, 处理程序往往还需要创建额外的 goroutine 去访问后端资源, 比如数据库, RPC 服务等. 由于 goroutine 都处理同一个请求, 往往还会访问一些共享的资源, 比如用户身份信息, 认证 token, 请求截止时间等. 如果请求超时或者被取消后, 所有的 goroutine 都应该马上退出, 并且释放相关资源. 此时就需要 context 来取消所有的 goroutine.&lt;/p&gt;
+
+&lt;h3 id=&quot;context-接口定义&quot;&gt;context 接口定义&lt;/h3&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// A Context carries a deadline, a cancellation signal, and other values across&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// API boundaries.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// Context's methods may be called by multiple goroutines simultaneously.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Deadline returns the time when work done on behalf of this context&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// should be canceled. Deadline returns ok==false when no deadline is&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// set. Successive calls to Deadline return the same results.&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deadline&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ok&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;// Done returns a channel that's closed when work done on behalf of this&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// context should be canceled. Done may return nil if this context can&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// never be canceled. Successive calls to Done return the same value.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// The close of the Done channel may happen asynchronously,&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// after the cancel function returns.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// WithCancel arranges for Done to be closed when cancel is called;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// WithDeadline arranges for Done to be closed when the deadline&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// expires; WithTimeout arranges for Done to be closed when the timeout&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// elapses.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Done is provided for use in select statements:&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  // Stream generates values with DoSomething and sends them to out&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  // until DoSomething returns an error or ctx.Done is closed.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  func Stream(ctx context.Context, out chan&amp;lt;- Value) error {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  	for {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		v, err := DoSomething(ctx)&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		if err != nil {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  			return err&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		select {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		case &amp;lt;-ctx.Done():&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  			return ctx.Err()&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		case out &amp;lt;- v:&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  		}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  	}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//  }&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// See https://blog.golang.org/pipelines for more examples of how to use&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// a Done channel for cancellation.&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;chan&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;// If Done is not yet closed, Err returns nil.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// If Done is closed, Err returns a non-nil error explaining why:&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Canceled if the context was canceled&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// or DeadlineExceeded if the context's deadline passed.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// After Err returns a non-nil error, successive calls to Err return the same error.&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;error&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;// Value returns the value associated with this context for key, or nil&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// if no value is associated with key. Successive calls to Value with&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// the same key returns the same result.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Use context values only for request-scoped data that transits&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// processes and API boundaries, not for passing optional parameters to&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// functions.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// A key identifies a specific value in a Context. Functions that wish&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// to store values in Context typically allocate a key in a global&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// variable then use that key as the argument to context.WithValue and&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Context.Value. A key can be any type that supports equality;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// packages should define keys as an unexported type to avoid&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// collisions.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Packages that define a Context key should provide type-safe accessors&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// for the values stored using that key:&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// Package user defines a User type that's stored in Contexts.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	package user&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	import &quot;context&quot;&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// User is the type of value stored in the Contexts.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	type User struct {...}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// key is an unexported type for keys defined in this package.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// This prevents collisions with keys defined in other packages.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	type key int&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// userKey is the key for user.User values in Contexts. It is&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// unexported; clients use user.NewContext and user.FromContext&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// instead of using this key directly.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	var userKey key&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// NewContext returns a new Context that carries value u.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	func NewContext(ctx context.Context, u *User) context.Context {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 		return context.WithValue(ctx, userKey, u)&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	}&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;//&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	// FromContext returns the User value stored in ctx, if any.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	func FromContext(ctx context.Context) (*User, bool) {&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 		u, ok := ctx.Value(userKey).(*User)&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 		return u, ok&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// 	}&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Deadline方法是获取设置的截止时间的意思，第一个返回是截止时间，到了这个时间点，Context会自动发起取消请求；第二个返回值ok==false时表示没有设置截止时间，如果需要取消的话，需要调用取消函数进行取消。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Done方法返回一个只读的chan，类型为struct{}，我们在goroutine中，如果该方法返回的chan可以读取，则意味着parent context已经发起了取消请求，我们通过Done方法收到这个信号后，就应该做清理操作，然后退出goroutine，释放资源。之后，Err 方法会返回一个错误，告知为什么 Context 被取消。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Err方法返回取消的错误原因，因为什么Context被取消。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Value方法获取该Context上绑定的值，是一个键值对，所以要通过一个Key才可以获取对应的值，这个值一般是线程安全的。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;context-实现方法&quot;&gt;context 实现方法&lt;/h1&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;todo&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;// Background returns a non-nil, empty Context. It is never canceled, has no&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// values, and has no deadline. It is typically used by the main function,&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// initialization, and tests, and as the top-level Context for incoming&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// requests.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;// TODO returns a non-nil, empty Context. Code should use context.TODO when&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// it's unclear which Context to use or it is not yet available (because the&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// surrounding function has not yet been extended to accept a Context&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// parameter).&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TODO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;todo&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;background-方法&quot;&gt;Background 方法&lt;/h2&gt;
+
+&lt;p&gt;该方法主要用于 main 函数, 初始化以及测试代码中, 作为 context 的树结构的最顶层 context, 也被称为根 context, 不能被取消&lt;/p&gt;
+
+&lt;h2 id=&quot;todo-方法&quot;&gt;TODO 方法&lt;/h2&gt;
+
+&lt;p&gt;如果不知道使用什么 context 时候, 可以使用这个.&lt;/p&gt;
+
+&lt;h2 id=&quot;emptyctx-本质&quot;&gt;emptyCtx 本质&lt;/h2&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// An emptyCtx is never canceled, has no values, and has no deadline. It is not&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// struct{}, since vars of this type must have distinct addresses.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deadline&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ok&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;chan&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emptyCtx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;context.Background&quot;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;todo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;context.TODO&quot;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;unknown empty Context&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Background 以及 TODO 实际上都是返回了一个 emptyCtx 实例. 实现的 Deadline 方法中均未不可手动取消&lt;/p&gt;
+
+&lt;h2 id=&quot;context-继承&quot;&gt;context 继承&lt;/h2&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WithCancel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cancel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CancelFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WithDeadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deadline&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CancelFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WithTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CancelFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WithValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;WithCancel函数，传递一个父Context作为参数，返回子Context，以及一个取消函数用来取消Context。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WithDeadline函数，和WithCancel差不多，它会多传递一个截止时间参数，意味着到了这个时间点，会自动取消Context，当然我们也可以不等到这个时候，可以提前通过取消函数进行取消。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WithTimeout和WithDeadline基本上一样，这个表示是超时自动取消，是多少时间后自动取消Context的意思。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;WithValue函数和取消Context无关，它是为了生成一个绑定了一个键值对数据的Context，这个绑定的数据可以通过Context.Value方法访问到，这是我们实际用经常要用到的技巧，一般我们想要通过上下文来传递数据时，可以通过这个方法，如我们需要tarce追踪系统调用栈的时候。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Chaim</name></author><category term="golang" /><category term="context" /><summary type="html">业务场景 用户发出请求后, 点击了取消. 此时该请求会对应几个 goroutine, 一个获取身份信息, 一个获取 db 数据, 一个校验 token. 一旦请求被取消, 该请求涉及到的其他 goroutine 也应该被取消 实现方式 原始的 Demo 处理过程 package main import ( &quot;fmt&quot; &quot;sync&quot; &quot;time&quot; ) var wg sync.WaitGroup func worker() { for { fmt.Println(&quot;worker&quot;) time.Sleep(time.Second) } // 如何接收外部命令实现退出 wg.Done() } func main() { wg.Add(1) go worker() // 如何优雅的实现结束子goroutine wg.Wait() fmt.Println(&quot;main done&quot;) } 全局变量方式处理 package main import ( &quot;fmt&quot; &quot;sync&quot; &quot;time&quot; ) var wg sync.WaitGroup var exit bool // 全局变量方式存在的问题： // 1. 使用全局变量在跨包调用时不容易统一 // 2. 如果worker中再启动goroutine，就不太好控制 func worker() { for { fmt.Println(&quot;worker&quot;) time.Sleep(time.Second) if exit { break } } wg.Done() } func main() { wg.Add(1) go worker() time.Sleep(time.Second * 3) // sleep3秒以免程序过快退出 exit = true // 修改全局变量实现子goroutine的退出 wg.Wait() fmt.Println(&quot;main done&quot;) } 通道解决方式 package main import ( &quot;fmt&quot; &quot;sync&quot; &quot;time&quot; ) var wg sync.WaitGroup // 管道方式存在的问题： // 1. 使用全局变量在跨包调用时不容易实现规范和统一，需要维护一个共用的channel func worker(exitChan chan struct{}) { LOOP: for { fmt.Println(&quot;worker&quot;) time.Sleep(time.Second) select { case &amp;lt;-exitChan: // 等待接收上级通知 break LOOP default: } } wg.Done() } func main() { var exitChan = make(chan struct{}) wg.Add(1) go worker(exitChan) time.Sleep(time.Second * 3) // sleep3秒以免程序过快退出 exitChan &amp;lt;- struct{}{} // 给子goroutine发送退出信号 close(exitChan) wg.Wait() fmt.Println(&quot;main done&quot;) } 官方推荐版本 只需要将 context 对象传入, 即可以解决多个 goroutine 的上下文问题 package main import ( &quot;context&quot; &quot;fmt&quot; &quot;sync&quot; &quot;time&quot; ) var wg sync.WaitGroup func worker(ctx context.Context) { LOOP: for { fmt.Println(&quot;worker&quot;) time.Sleep(time.Second) select { case &amp;lt;-ctx.Done(): // 等待上级通知 break LOOP default: } } wg.Done() } func main() { ctx, cancel := context.WithCancel(context.Background()) wg.Add(1) go worker(ctx) time.Sleep(time.Second * 3) cancel() // 通知子goroutine结束 wg.Wait() fmt.Println(&quot;main done&quot;) } context 是什么 官方定义 Golang 1.7 之后加入了一个标准库 context. 该标准库定义为 Context 类型, 专门用于简化对于处理单个请求的多个 goroutine 之间与请求域的数据, 取消信号, 截止时间等相关操作, 这些操作往往涉及到调用多个 API. 网络请求使用背景 如果有一个网络请求 request, 每个 request 都需要开启一个 goroutine 处理一些事情, 这些 goroutine 可能又会开启其他的 goroutine. 此时可以通过 context 来跟踪所有的 goroutine, 并且通过 context 来控制他们. 服务器程序使用背景 在 Go 服务器程序中, 每个请求都会有 goroutine 去处理. 然而, 处理程序往往还需要创建额外的 goroutine 去访问后端资源, 比如数据库, RPC 服务等. 由于 goroutine 都处理同一个请求, 往往还会访问一些共享的资源, 比如用户身份信息, 认证 token, 请求截止时间等. 如果请求超时或者被取消后, 所有的 goroutine 都应该马上退出, 并且释放相关资源. 此时就需要 context 来取消所有的 goroutine. context 接口定义 // A Context carries a deadline, a cancellation signal, and other values across // API boundaries. // // Context's methods may be called by multiple goroutines simultaneously. type Context interface { // Deadline returns the time when work done on behalf of this context // should be canceled. Deadline returns ok==false when no deadline is // set. Successive calls to Deadline return the same results. Deadline() (deadline time.Time, ok bool) // Done returns a channel that's closed when work done on behalf of this // context should be canceled. Done may return nil if this context can // never be canceled. Successive calls to Done return the same value. // The close of the Done channel may happen asynchronously, // after the cancel function returns. // // WithCancel arranges for Done to be closed when cancel is called; // WithDeadline arranges for Done to be closed when the deadline // expires; WithTimeout arranges for Done to be closed when the timeout // elapses. // // Done is provided for use in select statements: // // // Stream generates values with DoSomething and sends them to out // // until DoSomething returns an error or ctx.Done is closed. // func Stream(ctx context.Context, out chan&amp;lt;- Value) error { // for { // v, err := DoSomething(ctx) // if err != nil { // return err // } // select { // case &amp;lt;-ctx.Done(): // return ctx.Err() // case out &amp;lt;- v: // } // } // } // // See https://blog.golang.org/pipelines for more examples of how to use // a Done channel for cancellation. Done() &amp;lt;-chan struct{} // If Done is not yet closed, Err returns nil. // If Done is closed, Err returns a non-nil error explaining why: // Canceled if the context was canceled // or DeadlineExceeded if the context's deadline passed. // After Err returns a non-nil error, successive calls to Err return the same error. Err() error // Value returns the value associated with this context for key, or nil // if no value is associated with key. Successive calls to Value with // the same key returns the same result. // // Use context values only for request-scoped data that transits // processes and API boundaries, not for passing optional parameters to // functions. // // A key identifies a specific value in a Context. Functions that wish // to store values in Context typically allocate a key in a global // variable then use that key as the argument to context.WithValue and // Context.Value. A key can be any type that supports equality; // packages should define keys as an unexported type to avoid // collisions. // // Packages that define a Context key should provide type-safe accessors // for the values stored using that key: // // // Package user defines a User type that's stored in Contexts. // package user // // import &quot;context&quot; // // // User is the type of value stored in the Contexts. // type User struct {...} // // // key is an unexported type for keys defined in this package. // // This prevents collisions with keys defined in other packages. // type key int // // // userKey is the key for user.User values in Contexts. It is // // unexported; clients use user.NewContext and user.FromContext // // instead of using this key directly. // var userKey key // // // NewContext returns a new Context that carries value u. // func NewContext(ctx context.Context, u *User) context.Context { // return context.WithValue(ctx, userKey, u) // } // // // FromContext returns the User value stored in ctx, if any. // func FromContext(ctx context.Context) (*User, bool) { // u, ok := ctx.Value(userKey).(*User) // return u, ok // } Value(key interface{}) interface{} } Deadline方法是获取设置的截止时间的意思，第一个返回是截止时间，到了这个时间点，Context会自动发起取消请求；第二个返回值ok==false时表示没有设置截止时间，如果需要取消的话，需要调用取消函数进行取消。 Done方法返回一个只读的chan，类型为struct{}，我们在goroutine中，如果该方法返回的chan可以读取，则意味着parent context已经发起了取消请求，我们通过Done方法收到这个信号后，就应该做清理操作，然后退出goroutine，释放资源。之后，Err 方法会返回一个错误，告知为什么 Context 被取消。 Err方法返回取消的错误原因，因为什么Context被取消。 Value方法获取该Context上绑定的值，是一个键值对，所以要通过一个Key才可以获取对应的值，这个值一般是线程安全的。 context 实现方法 var ( background = new(emptyCtx) todo = new(emptyCtx) ) // Background returns a non-nil, empty Context. It is never canceled, has no // values, and has no deadline. It is typically used by the main function, // initialization, and tests, and as the top-level Context for incoming // requests. func Background() Context { return background } // TODO returns a non-nil, empty Context. Code should use context.TODO when // it's unclear which Context to use or it is not yet available (because the // surrounding function has not yet been extended to accept a Context // parameter). func TODO() Context { return todo } Background 方法 该方法主要用于 main 函数, 初始化以及测试代码中, 作为 context 的树结构的最顶层 context, 也被称为根 context, 不能被取消 TODO 方法 如果不知道使用什么 context 时候, 可以使用这个. emptyCtx 本质 // An emptyCtx is never canceled, has no values, and has no deadline. It is not // struct{}, since vars of this type must have distinct addresses. type emptyCtx int func (*emptyCtx) Deadline() (deadline time.Time, ok bool) { return } func (*emptyCtx) Done() &amp;lt;-chan struct{} { return nil } func (*emptyCtx) Err() error { return nil } func (*emptyCtx) Value(key interface{}) interface{} { return nil } func (e *emptyCtx) String() string { switch e { case background: return &quot;context.Background&quot; case todo: return &quot;context.TODO&quot; } return &quot;unknown empty Context&quot; } Background 以及 TODO 实际上都是返回了一个 emptyCtx 实例. 实现的 Deadline 方法中均未不可手动取消 context 继承 func WithCancel(parent Context) (ctx Context, cancel CancelFunc) func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc) func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) func WithValue(parent Context, key, val interface{}) Context WithCancel函数，传递一个父Context作为参数，返回子Context，以及一个取消函数用来取消Context。 WithDeadline函数，和WithCancel差不多，它会多传递一个截止时间参数，意味着到了这个时间点，会自动取消Context，当然我们也可以不等到这个时候，可以提前通过取消函数进行取消。 WithTimeout和WithDeadline基本上一样，这个表示是超时自动取消，是多少时间后自动取消Context的意思。 WithValue函数和取消Context无关，它是为了生成一个绑定了一个键值对数据的Context，这个绑定的数据可以通过Context.Value方法访问到，这是我们实际用经常要用到的技巧，一般我们想要通过上下文来传递数据时，可以通过这个方法，如我们需要tarce追踪系统调用栈的时候。</summary></entry><entry><title type="html">Mac禁用option组合键特殊字符.md</title><link href="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html" rel="alternate" type="text/html" title="Mac禁用option组合键特殊字符.md" /><published>2020-08-07T00:00:00+08:00</published><updated>2020-08-07T00:00:00+08:00</updated><id>http://localhost:4000/2020/08/07/Mac%20%E7%A6%81%E7%94%A8%20option%20%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6</id><content type="html" xml:base="http://localhost:4000/2020/08/07/Mac-%E7%A6%81%E7%94%A8-option-%E7%BB%84%E5%90%88%E9%94%AE%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6.html">&lt;h1 id=&quot;iterm2-中&quot;&gt;Iterm2 中&lt;/h1&gt;
 
 &lt;h2 id=&quot;操作步骤&quot;&gt;操作步骤&lt;/h2&gt;
 

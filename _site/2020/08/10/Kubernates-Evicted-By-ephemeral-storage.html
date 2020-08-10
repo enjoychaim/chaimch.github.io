@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="zh-Hans">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Kubernates Evicted By ephemeral-storage - Chaim Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Golang Context 使用与理解 - Chaim Blog</title>
 
-<meta name="description" content="报错如下  Type     Reason     Age                From                                     Message  ----     ------     ----               ----                   ...">
+<meta name="description" content="业务场景用户发出请求后, 点击了取消. 此时该请求会对应几个 goroutine, 一个获取身份信息, 一个获取 db 数据, 一个校验 token. 一旦请求被取消, 该请求涉及到的其他 goroutine 也应该被取消实现方式原始的 Demo 处理过程package mainimport (	"fmt"	"s...">
 <link rel="canonical" href="http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -273,47 +273,394 @@
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Kubernates Evicted By ephemeral-storage</h1></header><span class="split-space">&nbsp;</span>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Golang Context 使用与理解</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="在 Github 上修改"
             href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2020-08-10-Kubernates Evicted By ephemeral-storage.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Kubernates Evicted By ephemeral-storage"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Golang Context 使用与理解"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=kubernates">kubernates</a>
+                href="/archive.html?tag=golang">golang</a>
             </li><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=evicted">evicted</a>
+                href="/archive.html?tag=context">context</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月10日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="kubernates:evicted:2020-08-10">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-10T00:00:00+08:00">
-    <meta itemprop="keywords" content="kubernates,evicted"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="golang:context:2020-08-10">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-10T00:00:00+08:00">
+    <meta itemprop="keywords" content="golang,context"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
-<div class="article__content" itemprop="articleBody"><h2 id="报错如下">报错如下</h2>
+<div class="article__content" itemprop="articleBody"><h1 id="业务场景">业务场景</h1>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Type     Reason     Age                From                                     Message
-  ----     ------     ----               ----                                     -------
-  Warning  Unhealthy  52m                kubelet, ip-172-30-200-182.ec2.internal  Readiness probe failed: Get http://172.30.206.82:10902/-/ready: dial tcp 172.30.206.82:10902: connect: connection refused
-  Normal   Pulled     52m (x2 over 22h)  kubelet, ip-172-30-200-182.ec2.internal  Container image "quay.io/thanos/thanos:v0.14.0" already present on machine
-  Normal   Created    52m (x2 over 22h)  kubelet, ip-172-30-200-182.ec2.internal  Created container thanos
-  Normal   Started    52m (x2 over 22h)  kubelet, ip-172-30-200-182.ec2.internal  Started container thanos
-  Warning  Evicted    28m                kubelet, ip-172-30-200-182.ec2.internal  The node was low on resource: ephemeral-storage. Container prometheus was using 20Ki, which exceeds its request of 0. Container thanos was using 16Ki, which exceeds its request of 0.
-  Normal   Killing    28m                kubelet, ip-172-30-200-182.ec2.internal  Stopping container prometheus
-  Normal   Killing    28m                kubelet, ip-172-30-200-182.ec2.internal  Stopping container thanos
+<p>用户发出请求后, 点击了取消. 此时该请求会对应几个 goroutine, 一个获取身份信息, 一个获取 db 数据, 一个校验 token. 一旦请求被取消, 该请求涉及到的其他 goroutine 也应该被取消</p>
+
+<h1 id="实现方式">实现方式</h1>
+
+<h2 id="原始的-demo-处理过程">原始的 Demo 处理过程</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"sync"</span>
+	<span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">var</span> <span class="n">wg</span> <span class="n">sync</span><span class="o">.</span><span class="n">WaitGroup</span>
+
+<span class="k">func</span> <span class="n">worker</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">for</span> <span class="p">{</span>
+		<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"worker"</span><span class="p">)</span>
+		<span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="c">// 如何接收外部命令实现退出</span>
+	<span class="n">wg</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">wg</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+	<span class="k">go</span> <span class="n">worker</span><span class="p">()</span>
+	<span class="c">// 如何优雅的实现结束子goroutine</span>
+	<span class="n">wg</span><span class="o">.</span><span class="n">Wait</span><span class="p">()</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"main done"</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
-<h2 id="解决办法">解决办法</h2>
+<h2 id="全局变量方式处理">全局变量方式处理</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        resources:
-          limits:
-            cpu: "1500m"
-            memory: "14.5Gi"
-            ephemeral-storage: "10Gi"
-          requests:
-            cpu: "1500m"
-            memory: "14.5Gi"
-            ephemeral-storage: "10Gi"
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"sync"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">var</span> <span class="n">wg</span> <span class="n">sync</span><span class="o">.</span><span class="n">WaitGroup</span>
+<span class="k">var</span> <span class="n">exit</span> <span class="kt">bool</span>
+
+<span class="c">// 全局变量方式存在的问题：</span>
+<span class="c">// 1. 使用全局变量在跨包调用时不容易统一</span>
+<span class="c">// 2. 如果worker中再启动goroutine，就不太好控制</span>
+<span class="k">func</span> <span class="n">worker</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"worker"</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exit</span> <span class="p">{</span>
+            <span class="k">break</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="k">go</span> <span class="n">worker</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span> <span class="o">*</span> <span class="m">3</span><span class="p">)</span> <span class="c">// sleep3秒以免程序过快退出</span>
+    <span class="n">exit</span> <span class="o">=</span> <span class="no">true</span>                 <span class="c">// 修改全局变量实现子goroutine的退出</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Wait</span><span class="p">()</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"main done"</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
+<h2 id="通道解决方式">通道解决方式</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"sync"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">var</span> <span class="n">wg</span> <span class="n">sync</span><span class="o">.</span><span class="n">WaitGroup</span>
+<span class="c">// 管道方式存在的问题：</span>
+<span class="c">// 1. 使用全局变量在跨包调用时不容易实现规范和统一，需要维护一个共用的channel</span>
+
+<span class="k">func</span> <span class="n">worker</span><span class="p">(</span><span class="n">exitChan</span> <span class="k">chan</span> <span class="k">struct</span><span class="p">{})</span> <span class="p">{</span>
+<span class="n">LOOP</span><span class="o">:</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"worker"</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+        <span class="k">select</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">&lt;-</span><span class="n">exitChan</span><span class="o">:</span> <span class="c">// 等待接收上级通知</span>
+            <span class="k">break</span> <span class="n">LOOP</span>
+        <span class="k">default</span><span class="o">:</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="n">exitChan</span> <span class="o">=</span> <span class="nb">make</span><span class="p">(</span><span class="k">chan</span> <span class="k">struct</span><span class="p">{})</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="k">go</span> <span class="n">worker</span><span class="p">(</span><span class="n">exitChan</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span> <span class="o">*</span> <span class="m">3</span><span class="p">)</span> <span class="c">// sleep3秒以免程序过快退出</span>
+    <span class="n">exitChan</span> <span class="o">&lt;-</span> <span class="k">struct</span><span class="p">{}{}</span>      <span class="c">// 给子goroutine发送退出信号</span>
+    <span class="nb">close</span><span class="p">(</span><span class="n">exitChan</span><span class="p">)</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Wait</span><span class="p">()</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"main done"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="官方推荐版本">官方推荐版本</h2>
+
+<p>只需要将 context 对象传入, 即可以解决多个 goroutine 的上下文问题</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"context"</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"sync"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">var</span> <span class="n">wg</span> <span class="n">sync</span><span class="o">.</span><span class="n">WaitGroup</span>
+
+<span class="k">func</span> <span class="n">worker</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">LOOP</span><span class="o">:</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"worker"</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span><span class="p">)</span>
+        <span class="k">select</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">&lt;-</span><span class="n">ctx</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span><span class="o">:</span> <span class="c">// 等待上级通知</span>
+            <span class="k">break</span> <span class="n">LOOP</span>
+        <span class="k">default</span><span class="o">:</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ctx</span><span class="p">,</span> <span class="n">cancel</span> <span class="o">:=</span> <span class="n">context</span><span class="o">.</span><span class="n">WithCancel</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">Background</span><span class="p">())</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="k">go</span> <span class="n">worker</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">Sleep</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">Second</span> <span class="o">*</span> <span class="m">3</span><span class="p">)</span>
+    <span class="n">cancel</span><span class="p">()</span> <span class="c">// 通知子goroutine结束</span>
+    <span class="n">wg</span><span class="o">.</span><span class="n">Wait</span><span class="p">()</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"main done"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h1 id="context-是什么">context 是什么</h1>
+
+<h2 id="官方定义">官方定义</h2>
+
+<p>Golang 1.7 之后加入了一个标准库 context. 该标准库定义为 Context 类型, 专门用于简化对于处理单个请求的多个 goroutine 之间与请求域的数据, 取消信号, 截止时间等相关操作, 这些操作往往涉及到调用多个 API.</p>
+
+<h3 id="网络请求使用背景">网络请求使用背景</h3>
+
+<p>如果有一个网络请求 request, 每个 request 都需要开启一个 goroutine 处理一些事情, 这些 goroutine 可能又会开启其他的 goroutine. 此时可以通过 context 来跟踪所有的 goroutine, 并且通过 context 来控制他们.</p>
+
+<h3 id="服务器程序使用背景">服务器程序使用背景</h3>
+
+<p>在 Go 服务器程序中, 每个请求都会有 goroutine 去处理. 然而, 处理程序往往还需要创建额外的 goroutine 去访问后端资源, 比如数据库, RPC 服务等. 由于 goroutine 都处理同一个请求, 往往还会访问一些共享的资源, 比如用户身份信息, 认证 token, 请求截止时间等. 如果请求超时或者被取消后, 所有的 goroutine 都应该马上退出, 并且释放相关资源. 此时就需要 context 来取消所有的 goroutine.</p>
+
+<h3 id="context-接口定义">context 接口定义</h3>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// A Context carries a deadline, a cancellation signal, and other values across</span>
+<span class="c">// API boundaries.</span>
+<span class="c">//</span>
+<span class="c">// Context's methods may be called by multiple goroutines simultaneously.</span>
+<span class="k">type</span> <span class="n">Context</span> <span class="k">interface</span> <span class="p">{</span>
+	<span class="c">// Deadline returns the time when work done on behalf of this context</span>
+	<span class="c">// should be canceled. Deadline returns ok==false when no deadline is</span>
+	<span class="c">// set. Successive calls to Deadline return the same results.</span>
+	<span class="n">Deadline</span><span class="p">()</span> <span class="p">(</span><span class="n">deadline</span> <span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">,</span> <span class="n">ok</span> <span class="kt">bool</span><span class="p">)</span>
+
+	<span class="c">// Done returns a channel that's closed when work done on behalf of this</span>
+	<span class="c">// context should be canceled. Done may return nil if this context can</span>
+	<span class="c">// never be canceled. Successive calls to Done return the same value.</span>
+	<span class="c">// The close of the Done channel may happen asynchronously,</span>
+	<span class="c">// after the cancel function returns.</span>
+	<span class="c">//</span>
+	<span class="c">// WithCancel arranges for Done to be closed when cancel is called;</span>
+	<span class="c">// WithDeadline arranges for Done to be closed when the deadline</span>
+	<span class="c">// expires; WithTimeout arranges for Done to be closed when the timeout</span>
+	<span class="c">// elapses.</span>
+	<span class="c">//</span>
+	<span class="c">// Done is provided for use in select statements:</span>
+	<span class="c">//</span>
+	<span class="c">//  // Stream generates values with DoSomething and sends them to out</span>
+	<span class="c">//  // until DoSomething returns an error or ctx.Done is closed.</span>
+	<span class="c">//  func Stream(ctx context.Context, out chan&lt;- Value) error {</span>
+	<span class="c">//  	for {</span>
+	<span class="c">//  		v, err := DoSomething(ctx)</span>
+	<span class="c">//  		if err != nil {</span>
+	<span class="c">//  			return err</span>
+	<span class="c">//  		}</span>
+	<span class="c">//  		select {</span>
+	<span class="c">//  		case &lt;-ctx.Done():</span>
+	<span class="c">//  			return ctx.Err()</span>
+	<span class="c">//  		case out &lt;- v:</span>
+	<span class="c">//  		}</span>
+	<span class="c">//  	}</span>
+	<span class="c">//  }</span>
+	<span class="c">//</span>
+	<span class="c">// See https://blog.golang.org/pipelines for more examples of how to use</span>
+	<span class="c">// a Done channel for cancellation.</span>
+	<span class="n">Done</span><span class="p">()</span> <span class="o">&lt;-</span><span class="k">chan</span> <span class="k">struct</span><span class="p">{}</span>
+
+	<span class="c">// If Done is not yet closed, Err returns nil.</span>
+	<span class="c">// If Done is closed, Err returns a non-nil error explaining why:</span>
+	<span class="c">// Canceled if the context was canceled</span>
+	<span class="c">// or DeadlineExceeded if the context's deadline passed.</span>
+	<span class="c">// After Err returns a non-nil error, successive calls to Err return the same error.</span>
+	<span class="n">Err</span><span class="p">()</span> <span class="kt">error</span>
+
+	<span class="c">// Value returns the value associated with this context for key, or nil</span>
+	<span class="c">// if no value is associated with key. Successive calls to Value with</span>
+	<span class="c">// the same key returns the same result.</span>
+	<span class="c">//</span>
+	<span class="c">// Use context values only for request-scoped data that transits</span>
+	<span class="c">// processes and API boundaries, not for passing optional parameters to</span>
+	<span class="c">// functions.</span>
+	<span class="c">//</span>
+	<span class="c">// A key identifies a specific value in a Context. Functions that wish</span>
+	<span class="c">// to store values in Context typically allocate a key in a global</span>
+	<span class="c">// variable then use that key as the argument to context.WithValue and</span>
+	<span class="c">// Context.Value. A key can be any type that supports equality;</span>
+	<span class="c">// packages should define keys as an unexported type to avoid</span>
+	<span class="c">// collisions.</span>
+	<span class="c">//</span>
+	<span class="c">// Packages that define a Context key should provide type-safe accessors</span>
+	<span class="c">// for the values stored using that key:</span>
+	<span class="c">//</span>
+	<span class="c">// 	// Package user defines a User type that's stored in Contexts.</span>
+	<span class="c">// 	package user</span>
+	<span class="c">//</span>
+	<span class="c">// 	import "context"</span>
+	<span class="c">//</span>
+	<span class="c">// 	// User is the type of value stored in the Contexts.</span>
+	<span class="c">// 	type User struct {...}</span>
+	<span class="c">//</span>
+	<span class="c">// 	// key is an unexported type for keys defined in this package.</span>
+	<span class="c">// 	// This prevents collisions with keys defined in other packages.</span>
+	<span class="c">// 	type key int</span>
+	<span class="c">//</span>
+	<span class="c">// 	// userKey is the key for user.User values in Contexts. It is</span>
+	<span class="c">// 	// unexported; clients use user.NewContext and user.FromContext</span>
+	<span class="c">// 	// instead of using this key directly.</span>
+	<span class="c">// 	var userKey key</span>
+	<span class="c">//</span>
+	<span class="c">// 	// NewContext returns a new Context that carries value u.</span>
+	<span class="c">// 	func NewContext(ctx context.Context, u *User) context.Context {</span>
+	<span class="c">// 		return context.WithValue(ctx, userKey, u)</span>
+	<span class="c">// 	}</span>
+	<span class="c">//</span>
+	<span class="c">// 	// FromContext returns the User value stored in ctx, if any.</span>
+	<span class="c">// 	func FromContext(ctx context.Context) (*User, bool) {</span>
+	<span class="c">// 		u, ok := ctx.Value(userKey).(*User)</span>
+	<span class="c">// 		return u, ok</span>
+	<span class="c">// 	}</span>
+	<span class="n">Value</span><span class="p">(</span><span class="n">key</span> <span class="k">interface</span><span class="p">{})</span> <span class="k">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Deadline方法是获取设置的截止时间的意思，第一个返回是截止时间，到了这个时间点，Context会自动发起取消请求；第二个返回值ok==false时表示没有设置截止时间，如果需要取消的话，需要调用取消函数进行取消。</p>
+  </li>
+  <li>
+    <p>Done方法返回一个只读的chan，类型为struct{}，我们在goroutine中，如果该方法返回的chan可以读取，则意味着parent context已经发起了取消请求，我们通过Done方法收到这个信号后，就应该做清理操作，然后退出goroutine，释放资源。之后，Err 方法会返回一个错误，告知为什么 Context 被取消。</p>
+  </li>
+  <li>
+    <p>Err方法返回取消的错误原因，因为什么Context被取消。</p>
+  </li>
+  <li>
+    <p>Value方法获取该Context上绑定的值，是一个键值对，所以要通过一个Key才可以获取对应的值，这个值一般是线程安全的。</p>
+  </li>
+</ol>
+
+<h1 id="context-实现方法">context 实现方法</h1>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="p">(</span>
+	<span class="n">background</span> <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">emptyCtx</span><span class="p">)</span>
+	<span class="n">todo</span>       <span class="o">=</span> <span class="nb">new</span><span class="p">(</span><span class="n">emptyCtx</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c">// Background returns a non-nil, empty Context. It is never canceled, has no</span>
+<span class="c">// values, and has no deadline. It is typically used by the main function,</span>
+<span class="c">// initialization, and tests, and as the top-level Context for incoming</span>
+<span class="c">// requests.</span>
+<span class="k">func</span> <span class="n">Background</span><span class="p">()</span> <span class="n">Context</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">background</span>
+<span class="p">}</span>
+
+<span class="c">// TODO returns a non-nil, empty Context. Code should use context.TODO when</span>
+<span class="c">// it's unclear which Context to use or it is not yet available (because the</span>
+<span class="c">// surrounding function has not yet been extended to accept a Context</span>
+<span class="c">// parameter).</span>
+<span class="k">func</span> <span class="n">TODO</span><span class="p">()</span> <span class="n">Context</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">todo</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="background-方法">Background 方法</h2>
+
+<p>该方法主要用于 main 函数, 初始化以及测试代码中, 作为 context 的树结构的最顶层 context, 也被称为根 context, 不能被取消</p>
+
+<h2 id="todo-方法">TODO 方法</h2>
+
+<p>如果不知道使用什么 context 时候, 可以使用这个.</p>
+
+<h2 id="emptyctx-本质">emptyCtx 本质</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// An emptyCtx is never canceled, has no values, and has no deadline. It is not</span>
+<span class="c">// struct{}, since vars of this type must have distinct addresses.</span>
+<span class="k">type</span> <span class="n">emptyCtx</span> <span class="kt">int</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="o">*</span><span class="n">emptyCtx</span><span class="p">)</span> <span class="n">Deadline</span><span class="p">()</span> <span class="p">(</span><span class="n">deadline</span> <span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">,</span> <span class="n">ok</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="o">*</span><span class="n">emptyCtx</span><span class="p">)</span> <span class="n">Done</span><span class="p">()</span> <span class="o">&lt;-</span><span class="k">chan</span> <span class="k">struct</span><span class="p">{}</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="o">*</span><span class="n">emptyCtx</span><span class="p">)</span> <span class="n">Err</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="o">*</span><span class="n">emptyCtx</span><span class="p">)</span> <span class="n">Value</span><span class="p">(</span><span class="n">key</span> <span class="k">interface</span><span class="p">{})</span> <span class="k">interface</span><span class="p">{}</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="no">nil</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">e</span> <span class="o">*</span><span class="n">emptyCtx</span><span class="p">)</span> <span class="n">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="n">e</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="n">background</span><span class="o">:</span>
+		<span class="k">return</span> <span class="s">"context.Background"</span>
+	<span class="k">case</span> <span class="n">todo</span><span class="o">:</span>
+		<span class="k">return</span> <span class="s">"context.TODO"</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="s">"unknown empty Context"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Background 以及 TODO 实际上都是返回了一个 emptyCtx 实例. 实现的 Deadline 方法中均未不可手动取消</p>
+
+<h2 id="context-继承">context 继承</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">WithCancel</span><span class="p">(</span><span class="n">parent</span> <span class="n">Context</span><span class="p">)</span> <span class="p">(</span><span class="n">ctx</span> <span class="n">Context</span><span class="p">,</span> <span class="n">cancel</span> <span class="n">CancelFunc</span><span class="p">)</span>
+
+<span class="k">func</span> <span class="n">WithDeadline</span><span class="p">(</span><span class="n">parent</span> <span class="n">Context</span><span class="p">,</span> <span class="n">deadline</span> <span class="n">time</span><span class="o">.</span><span class="n">Time</span><span class="p">)</span> <span class="p">(</span><span class="n">Context</span><span class="p">,</span> <span class="n">CancelFunc</span><span class="p">)</span>
+
+<span class="k">func</span> <span class="n">WithTimeout</span><span class="p">(</span><span class="n">parent</span> <span class="n">Context</span><span class="p">,</span> <span class="n">timeout</span> <span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="p">)</span> <span class="p">(</span><span class="n">Context</span><span class="p">,</span> <span class="n">CancelFunc</span><span class="p">)</span>
+
+<span class="k">func</span> <span class="n">WithValue</span><span class="p">(</span><span class="n">parent</span> <span class="n">Context</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="k">interface</span><span class="p">{})</span> <span class="n">Context</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>WithCancel函数，传递一个父Context作为参数，返回子Context，以及一个取消函数用来取消Context。</p>
+  </li>
+  <li>
+    <p>WithDeadline函数，和WithCancel差不多，它会多传递一个截止时间参数，意味着到了这个时间点，会自动取消Context，当然我们也可以不等到这个时候，可以提前通过取消函数进行取消。</p>
+  </li>
+  <li>
+    <p>WithTimeout和WithDeadline基本上一样，这个表示是超时自动取消，是多少时间后自动取消Context的意思。</p>
+  </li>
+  <li>
+    <p>WithValue函数和取消Context无关，它是为了生成一个绑定了一个键值对数据的Context，这个绑定的数据可以通过Context.Value方法访问到，这是我们实际用经常要用到的技巧，一般我们想要通过上下文来传递数据时，可以通过这个方法，如我们需要tarce追踪系统调用栈的时候。</p>
+  </li>
+</ol>
 </div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-10T00:00:00+08:00"><!-- start custom article footer snippet -->
 
 
@@ -352,7 +699,7 @@
       </a>
     </p>
   </div></div></footer>
-<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2020/08/07/Vim-Cheatsheet.html">Vim Cheatsheet</a></div></div></div>
+<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2020/08/10/Golang-Context-%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3.html">Kubernates Evicted By ephemeral-storage</a></div></div></div>
 
 </div>
 

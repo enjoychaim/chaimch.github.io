@@ -274,12 +274,51 @@
 
 <!-- end custom main top snippet -->
 <article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>主页</h1></header><meta itemprop="headline" content="主页"><meta itemprop="author" content="Chaim"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html"><h2 itemprop="headline" class="item__header">Kubernates Evicted By ephemeral-storage</h2></a></header>
+          <header><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html"><h2 itemprop="headline" class="item__header">Golang Context 使用与理解</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">业务场景
+
+用户发出请求后, 点击了取消. 此时该请求会对应几个 goroutine, 一个获取身份信息, 一个获取 db 数据, 一个校验 token. 一旦请求被取消, 该请求涉及到的其他 goroutine 也应该被取消
+
+实现方式
+
+原始的 Demo 处理过程
+
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var wg sync.WaitGroup
+
+func worker() {
+	for {
+		fmt.Println("worker")
+		time.Sleep(time.Second)
+	}
+	// 如何接收外部命令实现退出
+	wg.Done()
+}
+func main() {
+	wg.Add(1)
+	go work...</div><p><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=golang">golang</a>
+            </li><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=context">context</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月10日</span>
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="golang:context:2020-08-10">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-10T00:00:00+08:00">
+    <meta itemprop="keywords" content="golang,context"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2020/08/10/Golang-Context-%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3.html"><h2 itemprop="headline" class="item__header">Kubernates Evicted By ephemeral-storage</h2></a></header>
           <div class="item__description"><div class="article__content" itemprop="description articleBody">报错如下
 
   Type     Reason     Age                From                                     Message
   ----     ------     ----               ----                                     -------
-  Warning  Unhealthy  52m                kubelet, ip-172-30-200-182.ec2.internal  Readiness probe failed: Get http://172.30.206.82:10902/-/ready: dial tcp 172.30...</div><p><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+  Warning  Unhealthy  52m                kubelet, ip-172-30-200-182.ec2.internal  Readiness probe failed: Get http://172.30.206.82:10902/-/ready: dial tcp 172.30...</div><p><a href="/2020/08/10/Golang-Context-%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%90%86%E8%A7%A3.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
                 href="/archive.html?tag=kubernates">kubernates</a>
             </li><li>
@@ -472,44 +511,8 @@ tmpfs            32G     0   32G    0% /sys/fs/cgroup
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月31日</span>
             </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="web:architecture:2018-07-31">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-31T00:00:00+08:00">
     <meta itemprop="keywords" content="web,architecture"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2018/07/30/Mysql%E6%80%A7%E8%83%BD%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><h2 itemprop="headline" class="item__header">性能管理与架构设计</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">电商双11大促成败关键:  数据库和服务器的稳定
-
-
-  源代码相同, web服务器可以横向扩展, 来保证量大时的稳定性
-  数据库无法拷贝数据来实现稳定性, 很难保证完整性和一致性
-
-
-性能指标
-
-
-  rt, response time, 响应时间
-  pv,  , 页面被浏览次数
-  tps, transactions per second, 每秒内的事务数(包括用户请求服务器, 服务器内部处理, 服务器返回给用户)
-  qps, queries per seconds, 每秒查询率, 一台服务器每秒能够响应的查询次数
-
-
-影响数据库性能因素
-
-
-  sql的查询速度(大部分都是由慢查询导致的)
-  服务器硬件
-  网卡流量
-  磁盘IO
-
-
-大表: 记录行数单表超过千万行, 表...</div><p><a href="/2018/07/30/Mysql%E6%80%A7%E8%83%BD%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=mysql">mysql</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=database">database</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月30日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="mysql:database:2018-07-30">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-30T00:00:00+08:00">
-    <meta itemprop="keywords" content="mysql,database"></div>
       </article></div>
-</div><div class="layout--home"><div class="pagination"><p>共计 9 篇文章，2 页。</p>
+</div><div class="layout--home"><div class="pagination"><p>共计 10 篇文章，2 页。</p>
     <div class="pagination__menu">
       <ul class="menu menu--nowrap"><li><div class="button button--secondary button--circle disabled">
             <i class="fas fa-angle-left"></i>
