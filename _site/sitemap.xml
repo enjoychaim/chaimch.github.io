@@ -33,6 +33,10 @@
 <lastmod>2020-08-07T00:00:00+08:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html</loc>
+<lastmod>2020-08-10T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/about.html</loc>
 </url>
 <url>
@@ -40,5 +44,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/page2/</loc>
 </url>
 </urlset>
