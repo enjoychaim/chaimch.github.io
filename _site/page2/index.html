@@ -274,6 +274,29 @@
 
 <!-- end custom main top snippet -->
 <article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>主页</h1></header><meta itemprop="headline" content="主页"><meta itemprop="author" content="Chaim"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html"><h2 itemprop="headline" class="item__header">网站架构演变</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">1. 初始阶段的网站架构
+
+一般来讲，大型网站都是从小型网站发展而来，一开始的架构都比较简单，随着业务复杂和用户量的激增，才开始做很多架构上的改进。当它还是小型网站的时候，没有太多访客，一般来讲只需要一台服务器就够了，这时应用程序、数据库、文件等所有资源都在一台服务器上，网站架构如下图所示：
+
+
+
+2. 应用服务和数据服务分离
+
+随着网站业务的发展和用户量的增加，一台服务器就无法再满足需求了。大量用户访问导致访问速度越来越慢，而逐渐增加的数据也会导致存储空间不足。这时就需要将应用和数据分离，应用和数据分离后整个网站使用 3 台服务器：应用服务器、文件服务器和数据库服务器。这 3 台服务器对硬件资源的要求各不相同：
+
+
+  应用服务器业务逻辑，需要强大的CPU
+  数据库服务器对磁盘读写...</div><p><a href="/2018/07/31/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8F%98.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=web">web</a>
+            </li><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=architecture">architecture</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2018年 07月31日</span>
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="web:architecture:2018-07-31">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-31T00:00:00+08:00">
+    <meta itemprop="keywords" content="web,architecture"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
           <header><a href="/2018/07/30/Mysql%E6%80%A7%E8%83%BD%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><h2 itemprop="headline" class="item__header">性能管理与架构设计</h2></a></header>
           <div class="item__description"><div class="article__content" itemprop="description articleBody">电商双11大促成败关键:  数据库和服务器的稳定
 
@@ -337,7 +360,7 @@ python所支持的函数式编程并非纯函数式编程, 因为Python允许使
             </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="functional:programming:2018-07-25">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2018-07-25T00:00:00+08:00">
     <meta itemprop="keywords" content="functional,programming"></div>
       </article></div>
-</div><div class="layout--home"><div class="pagination"><p>共计 10 篇文章，2 页。</p>
+</div><div class="layout--home"><div class="pagination"><p>共计 11 篇文章，2 页。</p>
     <div class="pagination__menu">
       <ul class="menu menu--nowrap"><li><a class="button button--secondary button--circle" href="/">
             <i class="fas fa-angle-left"></i>

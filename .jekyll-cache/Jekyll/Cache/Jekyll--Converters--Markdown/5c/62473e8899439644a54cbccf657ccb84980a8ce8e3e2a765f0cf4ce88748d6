@@ -1,0 +1,36 @@
+I"�<h2 id="全局配置">全局配置</h2>
+
+<pre><code class="language-git">git config --global user.name "Chaim"
+git config --global user.email "chaim@xxx.com"
+</code></pre>
+
+<h2 id="创建一个仓库">创建一个仓库</h2>
+
+<pre><code class="language-git">git clone git@gitlab.xxx.net:groupname/test.git
+cd test
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
+</code></pre>
+
+<h2 id="推送一个存在的文件夹">推送一个存在的文件夹</h2>
+
+<pre><code class="language-git">cd existing_folder
+git init
+git remote add origin git@gitlab.xxx.net:groupname/test.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+</code></pre>
+
+<h2 id="推送一个存在的工程">推送一个存在的工程</h2>
+
+<pre><code class="language-git">cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@gitlab.xxx.net:groupname/test.git
+git push -u origin --all
+git push -u origin --tags
+</code></pre>
+
+:ET
