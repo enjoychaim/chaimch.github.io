@@ -274,7 +274,46 @@
 
 <!-- end custom main top snippet -->
 <article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>主页</h1></header><meta itemprop="headline" content="主页"><meta itemprop="author" content="Chaim"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html"><h2 itemprop="headline" class="item__header">Git 几种工程推送方式</h2></a></header>
+          <header><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html"><h2 itemprop="headline" class="item__header">AWS RDS 故障恢复</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">故障原因
+
+
+  可用区中断
+  主数据库实例故障
+  更改数据库实例服务器类型
+  数据库实例的操作系统在进行软件修补
+  数据库实例的手动故障转移是使用 Reboot with failover 启动的。
+
+
+Amazon RDS 单可用区故障恢复
+
+无论是主数据库实例故障, 还是从数据库实例故障, 此时均为 EC2 启动并替换的时间, 一般需要 5-10 分钟.
+
+Amazon RDS 多可用区故障恢复
+
+只读实例也可以单独配置多可用区.
+
+此时会进行故障迁移, 一般需要 60-120秒.
+
+Aurroa Mysql 故障
+
+写入器故障
+
+此时会进行故障迁移, 一般在30 秒内完成
+
+读取器故障
+
+读取器需要进行硬件替换, 一般读取器实例故障耗时需要 5-10 分钟来恢复, 也就...</div><p><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=aws">aws</a>
+            </li><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=rds">rds</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月12日</span>
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="aws:rds:2020-08-12">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-12T00:00:00+08:00">
+    <meta itemprop="keywords" content="aws,rds"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2020/08/12/AWS-RDS-%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D.html"><h2 itemprop="headline" class="item__header">Git 几种工程推送方式</h2></a></header>
           <div class="item__description"><div class="article__content" itemprop="description articleBody">全局配置
 
 git config --global user.name "Chaim"
@@ -296,7 +335,7 @@ git push -u origin master
 cd existing_folder
 git init
 git remote add origin git@gitlab.xxx.net:groupname/test.git
-g...</div><p><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+g...</div><p><a href="/2020/08/12/AWS-RDS-%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
                 href="/archive.html?tag=git">git</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月12日</span>
@@ -491,34 +530,8 @@ tmpfs            32G     0   32G    0% /sys/fs/cgroup
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月07日</span>
             </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="aws:ebs:20200807">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-07T00:00:00+08:00">
     <meta itemprop="keywords" content="aws,ebs"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html"><h2 itemprop="headline" class="item__header">AWS 本地采用 ECR 镜像进行调试</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">前置条件
-
-
-  具备 aws cli权限
-  本地配置 docker环境
-
-
-操作步骤
-
-
-  查看 ci 过程，获取镜像地址，例如 image xxx.dkr.ecr.us-east-1.amazonaws.com/ci-base/java8/v1
-  获取 ecr 授权密码，cmd 中输入 aws ecr get-login-password
-  本地 docker 授权 ecr，cmd 中输入 docker login -u AWS xxx.dkr.ecr.us-east-1.amazonaws.com</div><p><a href="/2020/08/04/%E6%9C%AC%E5%9C%B0%E9%87%87%E7%94%A8-ECR-%E9%95%9C%E5%83%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95.html">阅读更多</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=aws">aws</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=ecr">ecr</a>
-            </li><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=docker">docker</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月04日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="AWSECR:20200804">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-04T00:00:00+08:00">
-    <meta itemprop="keywords" content="aws,ecr,docker"></div>
       </article></div>
-</div><div class="layout--home"><div class="pagination"><p>共计 11 篇文章，2 页。</p>
+</div><div class="layout--home"><div class="pagination"><p>共计 12 篇文章，2 页。</p>
     <div class="pagination__menu">
       <ul class="menu menu--nowrap"><li><div class="button button--secondary button--circle disabled">
             <i class="fas fa-angle-left"></i>
