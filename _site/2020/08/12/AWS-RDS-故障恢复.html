@@ -1,9 +1,9 @@
 <!DOCTYPE html><html lang="zh-Hans">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Git 几种工程推送方式 - Chaim Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>AWS RDS 故障恢复 - Chaim Blog</title>
 
-<meta name="description" content="全局配置git config --global user.name "Chaim"git config --global user.email "chaim@xxx.com"创建一个仓库git clone git@gitlab.xxx.net:groupname/test.gitcd testtouch READ...">
+<meta name="description" content="故障原因  可用区中断  主数据库实例故障  更改数据库实例服务器类型  数据库实例的操作系统在进行软件修补  数据库实例的手动故障转移是使用 Reboot with failover 启动的。Amazon RDS 单可用区故障恢复无论是主数据库实例故障, 还是从数据库实例故障, 此时均为 EC2 启动并替换的时...">
 <link rel="canonical" href="http://localhost:4000/2020/08/12/AWS-RDS-%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -242,7 +242,7 @@
       },
       site: {
         toc: {
-          selectors: 'h1,h2,h3'
+          selectors: 'h1,h2,h3,h4'
         }
       },
       paths: {
@@ -273,52 +273,64 @@
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
 <!-- end custom main top snippet -->
-<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Git 几种工程推送方式</h1></header><span class="split-space">&nbsp;</span>
+<article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>AWS RDS 故障恢复</h1></header><span class="split-space">&nbsp;</span>
           <a class="edit-on-github"
             title="在 Github 上修改"
             href="https://github.com/chaimch/chaimch.github.io/tree/master/_posts/2020-08-12-AWS RDS 故障恢复.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Git 几种工程推送方式"><div class="article__info clearfix"><ul class="left-col menu"><li>
+            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="AWS RDS 故障恢复"><div class="article__info clearfix"><ul class="left-col menu"><li>
               <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=git">git</a>
+                href="/archive.html?tag=aws">aws</a>
+            </li><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=rds">rds</a>
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>2020年 08月12日</span>
-            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="git:2020-08-12">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-12T00:00:00+08:00">
-    <meta itemprop="keywords" content="git"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
+            </li><li><i class="far fa-eye"></i> <span class="js-pageview" data-page-key="aws:rds:2020-08-12">0</span> 阅读</li></ul></div><meta itemprop="author" content="Chaim"/><meta itemprop="datePublished" content="2020-08-12T00:00:00+08:00">
+    <meta itemprop="keywords" content="aws,rds"><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
 <!-- end custom article top snippet -->
-<div class="article__content" itemprop="articleBody"><h2 id="全局配置">全局配置</h2>
+<div class="article__content" itemprop="articleBody"><h2 id="故障原因">故障原因</h2>
 
-<pre><code class="language-git">git config --global user.name "Chaim"
-git config --global user.email "chaim@xxx.com"
-</code></pre>
+<ul>
+  <li>可用区中断</li>
+  <li>主数据库实例故障</li>
+  <li>更改数据库实例服务器类型</li>
+  <li>数据库实例的操作系统在进行软件修补</li>
+  <li>数据库实例的手动故障转移是使用 <strong>Reboot with failover</strong> 启动的。</li>
+</ul>
 
-<h2 id="创建一个仓库">创建一个仓库</h2>
+<h2 id="amazon-rds-单可用区故障恢复">Amazon RDS 单可用区故障恢复</h2>
 
-<pre><code class="language-git">git clone git@gitlab.xxx.net:groupname/test.git
-cd test
-touch README.md
-git add README.md
-git commit -m "add README"
-git push -u origin master
-</code></pre>
+<p>无论是主数据库实例故障, 还是从数据库实例故障, 此时均为 EC2 启动并替换的时间, 一般需要 <strong>5-10 分钟</strong>.</p>
 
-<h2 id="推送一个存在的文件夹">推送一个存在的文件夹</h2>
+<h2 id="amazon-rds-多可用区故障恢复">Amazon RDS 多可用区故障恢复</h2>
 
-<pre><code class="language-git">cd existing_folder
-git init
-git remote add origin git@gitlab.xxx.net:groupname/test.git
-git add .
-git commit -m "Initial commit"
-git push -u origin master
-</code></pre>
+<p>只读实例也可以单独配置多可用区.</p>
 
-<h2 id="推送一个存在的工程">推送一个存在的工程</h2>
+<p>此时会进行故障迁移, 一般需要 <strong>60-120秒</strong>.</p>
 
-<pre><code class="language-git">cd existing_repo
-git remote rename origin old-origin
-git remote add origin git@gitlab.xxx.net:groupname/test.git
-git push -u origin --all
-git push -u origin --tags
-</code></pre>
+<h2 id="aurroa-mysql-故障">Aurroa Mysql 故障</h2>
+
+<h3 id="写入器故障">写入器故障</h3>
+
+<p>此时会进行故障迁移, 一般在<strong>30 秒</strong>内完成</p>
+
+<h3 id="读取器故障">读取器故障</h3>
+
+<p>读取器需要进行硬件替换, 一般读取器实例故障耗时需要 <strong>5-10 分钟</strong>来恢复, 也就是启动 EC2 实例的时间.</p>
+
+<p>读取器实例时无法配置多可用区.</p>
+
+<h2 id="关于-aurora-mysql-读取器实例故障恢复时间过久解法">关于 Aurora Mysql 读取器实例故障恢复时间过久解法</h2>
+<h3 id="解法一-reader-endpoint">解法一: reader endpoint</h3>
+
+<ol>
+  <li>业务方使用reader endpoint, 且reader 节点的机器都是一样的, 有利于load balance.  如果极端情况下所有的reader node都挂了, reader endpoint可以利用上writer node, 这样就可以实时保障高可用了</li>
+  <li>减少 DNS 缓存超时,  将 Java DNS TTL 设置为较小的值有助于在后续连接尝试时在读取节点之间进行循环切换. 一般建议小于等于60s.</li>
+</ol>
+
+<h3 id="解法二-rds-proxy">解法二: rds proxy</h3>
+
+<p>参见: https://docs.aws.amazon.com/zh_cn/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html#rds-proxy-failover</p>
 
 </div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-08-12T00:00:00+08:00"><!-- start custom article footer snippet -->
 
@@ -358,7 +370,7 @@ git push -u origin --tags
       </a>
     </p>
   </div></div></footer>
-<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">Golang Context 使用与理解</a></div><div class="next"><span>下篇</span><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html">AWS RDS 故障恢复</a></div></div></div>
+<div class="article__section-navigator clearfix"><div class="previous"><span>上篇</span><a href="/2020/08/10/Kubernates-Evicted-By-ephemeral-storage.html">Golang Context 使用与理解</a></div><div class="next"><span>下篇</span><a href="/2020/08/12/Git-%E5%87%A0%E7%A7%8D%E5%B7%A5%E7%A8%8B%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F.html">Git 几种工程推送方式</a></div></div></div>
 
 </div>
 
