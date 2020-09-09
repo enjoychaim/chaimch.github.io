@@ -1,4 +1,4 @@
-I"�$<h2 id="问题">问题</h2>
+I"�/<h2 id="问题">问题</h2>
 
 <ol>
   <li>kubernates 是什么？</li>
@@ -92,8 +92,76 @@
   <li>设置切换名称空间别称 <code class="language-plaintext highlighter-rouge">alias kcd='k config set-context $(k config current-context) --namespace'</code></li>
 </ol>
 
+<h4 id="hello-world">hello world</h4>
+
+<p>创建配置</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre></div></div>
+
+<p>创建应用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create -f 我的配置文件
+</code></pre></div></div>
+
+<p>查看应用</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl get pods -l app=nginx
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-67594d6bf6-9gdvr   1/1       Running   0          10m
+nginx-deployment-67594d6bf6-v6j7w   1/1       Running   0          10m
+</code></pre></div></div>
+
 <h4 id="kubernates-官方">Kubernates 官方</h4>
+
 <p>参见: <a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Kubernates Tutorials</a></p>
+
+<h3 id="为什么需要-pod">为什么需要 Pod</h3>
+
+<p>容器的本质是进程, Kubernates 的本质是操作系统</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pstree -g
+systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
+           | `-{gmain}(1984)
+           |-acpid(2044)
+          ...      
+           |-lxcfs(1936)-+-{lxcfs}(1936)
+           | `-{lxcfs}(1936)
+           |-mdadm(2135)
+           |-ntpd(2358)
+           |-polkitd(2128)-+-{gdbus}(2128)
+           | `-{gmain}(2128)
+           |-rsyslogd(1632)-+-{in:imklog}(1632)
+           |  |-{in:imuxsock) S 1(1632)
+           | `-{rs:main Q:Reg}(1632)
+           |-snapd(1942)-+-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+</code></pre></div></div>
+
+<p>在真正的操作系统中, 进程往往是以进程组的方式被组织在一起. 比如 rsyslogd 程序, 负责 linux 日志处理. 其中主程序 main, 和内核日志模块 imklog 等同属于 1632 进程组. 这些进程之间相互协作.</p>
+
+<p>如果将 rsyslogd 应用容器化, 由于受限于容器的“单进程模型”(容器没有管理多个进程的能力)，这三个模块往往需要被分别制作成三个不同的容器.</p>
 
 <h3 id="架构图">架构图</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/architecture.png" alt="architecture" /></p>
@@ -179,4 +247,11 @@
 <p>Kubelet 进程启动时会向 Kube-apiserver 注册节点自身信息, 定时上报所在节点的资源使用状态, 用以帮助kube-schedule 调度器为 Pod 资源对象预选节点.</p>
 
 <p>同时负责所在节点上的 Pod 资源对象的管理(Pod 资源对象的创建, 修改, 监控, 删除, 驱逐及Pod 声明周期管理等), 对所在节点的镜像和容器做一些清理工作, 保证节点上的镜像不会占满磁盘空间, 删除容器释放相关资源.</p>
+
+<p>kubelet 开放的接口, CRI 容器运行时接口, CNI 容器网络接口, CSI 容器存储接口.</p>
+
+<h4 id="kube-proxy">kube-proxy</h4>
+
+<p>节点上的网络代理, 监控 kube-apiserver 服务于端点资源变化, 同时可以通过 iptables/ipvs 等配置负载均衡器, 为一组 pod 提供统一的 tcp/udp 的流量转发和负载均衡功能.</p>
+
 :ET

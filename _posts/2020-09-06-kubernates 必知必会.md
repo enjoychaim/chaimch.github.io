@@ -51,7 +51,7 @@ kubernates 是 Google 公司开源的一个容器编排与调度管理框架, �
 
 ### Borg/Omega/K8S关联
 
-参见: [Borg/Omega/K8S关联](https://queue.acm.org/detail.cfm?id=2898444)
+详情见: [https://queue.acm.org/detail.cfm?id=2898444](https://queue.acm.org/detail.cfm?id=2898444)
 
 ### k8s特点
 
@@ -59,19 +59,17 @@ kubernates 是 Google 公司开源的一个容器编排与调度管理框架, �
 2. 可扩展性: 模块化, 插件化, 可挂载, 可组合
 3. 自动化: 自动部署, 自动重启, 自动复制, 自动伸缩/扩展
 
-
-
 ## k8s 该如何使用
 
 ### 环境准备篇
 
 #### 本地开发环境
-参见: [本地开发环境](https://github.com/chaimch/k8s-for-docker-desktop)
+详情见: [https://github.com/chaimch/k8s-for-docker-desktop](https://github.com/chaimch/k8s-for-docker-desktop)
 
 #### 云羊毛环境
-参见一: [GCP 羊毛](https://console.cloud.google.com/freetrial)
+GCP 羊毛, 详情见: [https://console.cloud.google.com/freetrial](https://console.cloud.google.com/freetrial)
 
-参见二: [katacoda 羊毛](https://katacoda.com/learn)
+katacoda羊毛, 详情见: [https://katacoda.com/learn](https://katacoda.com/learn)
 
 ### 入门
 
@@ -82,8 +80,101 @@ kubernates 是 Google 公司开源的一个容器编排与调度管理框架, �
 4. zsh 环境下, 调整 k 的自动补全 `source <(kubectl completion zsh)`
 5. 设置切换名称空间别称 `alias kcd='k config set-context $(k config current-context) --namespace'`
 
+#### hello world
+
+创建配置
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+```
+
+创建应用
+
+```
+kubectl create -f 我的配置文件
+```
+
+查看应用
+
+```
+$ kubectl get pods -l app=nginx
+NAME                                READY     STATUS    RESTARTS   AGE
+nginx-deployment-67594d6bf6-9gdvr   1/1       Running   0          10m
+nginx-deployment-67594d6bf6-v6j7w   1/1       Running   0          10m
+```
+
 #### Kubernates 官方
-参见: [Kubernates Tutorials](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+
+详情见: [https://kubernetes.io/docs/tutorials/kubernetes-basics/](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+
+### 为什么需要 Pod
+
+容器的本质是进程, Kubernates 的本质是操作系统
+
+```
+pstree -g
+systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
+           | `-{gmain}(1984)
+           |-acpid(2044)
+          ...      
+           |-lxcfs(1936)-+-{lxcfs}(1936)
+           | `-{lxcfs}(1936)
+           |-mdadm(2135)
+           |-ntpd(2358)
+           |-polkitd(2128)-+-{gdbus}(2128)
+           | `-{gmain}(2128)
+           |-rsyslogd(1632)-+-{in:imklog}(1632)
+           |  |-{in:imuxsock) S 1(1632)
+           | `-{rs:main Q:Reg}(1632)
+           |-snapd(1942)-+-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+           |  |-{snapd}(1942)
+```
+
+在真正的操作系统中, 进程往往是以进程组的方式被组织在一起. 比如 rsyslogd 程序, 负责 linux 日志处理. 其中主程序 main, 和内核日志模块 imklog 等同属于 1632 进程组. 这些进程之间相互协作.
+
+如果将 rsyslogd 应用容器化, 由于受限于容器的“单进程模型”(容器没有管理多个进程的能力)，这三个模块往往需要被分别制作成三个不同的容器. 一旦 main 容器所在的节点不足以承担三个容器同时运行时候, 就容易出现成组调度问题.
+
+但是在 Kubernates 中就存在这种问题, Pod 是 Kubernetes 里的原子调度单位, 统一按照 Pod 而非容器的资源需求进行计算调度. 一般容器间会发生直接的文件交换, 使用 localhost 或 socket 文件进行本地通信, 非常频繁的远程调用, 共享 ns 等适合需要将多个容器放到同一个 pod 中.
+
+#### pod 实现原理
+
+Pod 里的所有容器, 共享的是同一个 Network Namespace, 并且可以声明共享同一个 Volume. 
+
+Kubernates 真正处理的还是 linux 容器的 ns 和 cgroups, 不并存在 pod 的边界或者隔离环境. pod 里所有的容器, 共享同一个 network namespace, 并且可以声明共享同一 volume. 相当于 A 和 B 两个容器的 pod, 等同于容器 A 共享容器 B 的网络和 volume. 
+
+通过以下命令就可以实现
+
+```
+docker run --net=B --volumes-from=B --name=A image-A
+```
+
+但是, 上述的方式存在一个问题. B 容器必须要在 A 容器之前启动, 依次类推多个容器之前就需要去维护拓扑关系. 因此在 Kubernates 中会直接首先创建一个 infra 的容器, 这样其他的容器就可以直接以 Join Network Namespace 方式加入进来, 其他的容器直接就只是对等关系, 彼此不会相互依赖.
+
+##### 容器设计模式
+
+详情见: [https://www.usenix.org/conference/hotcloud16/workshop-program/presentation/burns](https://www.usenix.org/conference/hotcloud16/workshop-program/presentation/burns)
+
 
 ### 架构图
 ![architecture](https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/architecture.png)
@@ -136,3 +227,10 @@ Kubernates 集群的默认调度器, 主要负责在 Kubernates 集群中为一�
  Kubelet 进程启动时会向 Kube-apiserver 注册节点自身信息, 定时上报所在节点的资源使用状态, 用以帮助kube-schedule 调度器为 Pod 资源对象预选节点. 
 
 同时负责所在节点上的 Pod 资源对象的管理(Pod 资源对象的创建, 修改, 监控, 删除, 驱逐及Pod 声明周期管理等), 对所在节点的镜像和容器做一些清理工作, 保证节点上的镜像不会占满磁盘空间, 删除容器释放相关资源.
+
+kubelet 开放的接口, CRI 容器运行时接口, CNI 容器网络接口, CSI 容器存储接口.
+
+#### kube-proxy
+
+节点上的网络代理, 监控 kube-apiserver 服务于端点资源变化, 同时可以通过 iptables/ipvs 等配置负载均衡器, 为一组 pod 提供统一的 tcp/udp 的流量转发和负载均衡功能.
+
