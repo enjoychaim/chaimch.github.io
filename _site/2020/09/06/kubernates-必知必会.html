@@ -3,7 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>kubernates 必知必会 - Chaim Blog</title>
 
-<meta name="description" content="问题  kubernates 是什么？  kubernates 解决了什么问题？  kubernates 该如何使用？  集群中资源是如何调度的？k8s 是什么, 解决了什么问题kubernates 是 Google 公司开源的一个容器编排与调度管理框架, 当前由 CNCF 托管.解决了分布式系统情况下, 容器的...">
+<meta name="description" content="问题  kubernates 是什么, kubernates 解决了什么问题？  kubernates 该如何使用？  集群中资源是如何调度的？k8s 是什么, 解决了什么问题kubernates 是 Google 公司开源的一个容器编排与调度管理框架, 当前由 CNCF 托管.解决了分布式系统情况下, 容器的编...">
 <link rel="canonical" href="http://localhost:4000/2020/09/06/kubernates-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A.html"><link rel="alternate" type="application/rss+xml" title="Chaim Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
@@ -288,8 +288,7 @@
 <div class="article__content" itemprop="articleBody"><h2 id="问题">问题</h2>
 
 <ol>
-  <li>kubernates 是什么？</li>
-  <li>kubernates 解决了什么问题？</li>
+  <li>kubernates 是什么, kubernates 解决了什么问题？</li>
   <li>kubernates 该如何使用？</li>
   <li>集群中资源是如何调度的？</li>
 </ol>
@@ -383,35 +382,35 @@
 
 <p>创建配置</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 2
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.7.9
-        ports:
-        - containerPort: 80
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-deployment</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:1.7.9</span>
+        <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
 </code></pre></div></div>
 
 <p>创建应用</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create -f 我的配置文件
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create <span class="nt">-f</span> 我的配置文件
 </code></pre></div></div>
 
 <p>查看应用</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ kubectl get pods -l app=nginx
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get pods <span class="nt">-l</span> <span class="nv">app</span><span class="o">=</span>nginx
 NAME                                READY     STATUS    RESTARTS   AGE
 nginx-deployment-67594d6bf6-9gdvr   1/1       Running   0          10m
 nginx-deployment-67594d6bf6-v6j7w   1/1       Running   0          10m
@@ -425,25 +424,25 @@ nginx-deployment-67594d6bf6-v6j7w   1/1       Running   0          10m
 
 <p>容器的本质是进程, Kubernates 的本质是操作系统</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pstree -g
-systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
-           | `-{gmain}(1984)
-           |-acpid(2044)
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pstree <span class="nt">-g</span>
+systemd<span class="o">(</span>1<span class="o">)</span>-+-accounts-daemon<span class="o">(</span>1984<span class="o">)</span>-+-<span class="o">{</span>gdbus<span class="o">}(</span>1984<span class="o">)</span>
+           | <span class="sb">`</span>-<span class="o">{</span>gmain<span class="o">}(</span>1984<span class="o">)</span>
+           |-acpid<span class="o">(</span>2044<span class="o">)</span>
           ...      
-           |-lxcfs(1936)-+-{lxcfs}(1936)
-           | `-{lxcfs}(1936)
-           |-mdadm(2135)
-           |-ntpd(2358)
-           |-polkitd(2128)-+-{gdbus}(2128)
-           | `-{gmain}(2128)
-           |-rsyslogd(1632)-+-{in:imklog}(1632)
-           |  |-{in:imuxsock) S 1(1632)
-           | `-{rs:main Q:Reg}(1632)
-           |-snapd(1942)-+-{snapd}(1942)
-           |  |-{snapd}(1942)
-           |  |-{snapd}(1942)
-           |  |-{snapd}(1942)
-           |  |-{snapd}(1942)
+           |-lxcfs<span class="o">(</span>1936<span class="o">)</span>-+-<span class="o">{</span>lxcfs<span class="o">}(</span>1936<span class="o">)</span>
+           | <span class="sb">`</span>-<span class="o">{</span>lxcfs<span class="o">}(</span>1936<span class="o">)</span>
+           |-mdadm<span class="o">(</span>2135<span class="o">)</span>
+           |-ntpd<span class="o">(</span>2358<span class="o">)</span>
+           |-polkitd<span class="o">(</span>2128<span class="o">)</span>-+-<span class="o">{</span>gdbus<span class="o">}(</span>2128<span class="o">)</span>
+           | <span class="sb">`</span>-<span class="o">{</span>gmain<span class="o">}(</span>2128<span class="o">)</span>
+           |-rsyslogd<span class="o">(</span>1632<span class="o">)</span>-+-<span class="o">{</span><span class="k">in</span>:imklog<span class="o">}(</span>1632<span class="o">)</span>
+           |  |-<span class="o">{</span><span class="k">in</span>:imuxsock<span class="o">)</span> S 1<span class="o">(</span>1632<span class="o">)</span>
+           | <span class="sb">`</span>-<span class="o">{</span>rs:main Q:Reg<span class="o">}(</span>1632<span class="o">)</span>
+           |-snapd<span class="o">(</span>1942<span class="o">)</span>-+-<span class="o">{</span>snapd<span class="o">}(</span>1942<span class="o">)</span>
+           |  |-<span class="o">{</span>snapd<span class="o">}(</span>1942<span class="o">)</span>
+           |  |-<span class="o">{</span>snapd<span class="o">}(</span>1942<span class="o">)</span>
+           |  |-<span class="o">{</span>snapd<span class="o">}(</span>1942<span class="o">)</span>
+           |  |-<span class="o">{</span>snapd<span class="o">}(</span>1942<span class="o">)</span>
 </code></pre></div></div>
 
 <p>在真正的操作系统中, 进程往往是以进程组的方式被组织在一起. 比如 rsyslogd 程序, 负责 linux 日志处理. 其中主程序 main, 和内核日志模块 imklog 等同属于 1632 进程组. 这些进程之间相互协作.</p>
@@ -460,7 +459,7 @@ systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
 
 <p>通过以下命令就可以实现</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --net=B --volumes-from=B --name=A image-A
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--net</span><span class="o">=</span>B <span class="nt">--volumes-from</span><span class="o">=</span>B <span class="nt">--name</span><span class="o">=</span>A image-A
 </code></pre></div></div>
 
 <p>但是, 上述的方式存在一个问题. B 容器必须要在 A 容器之前启动, 依次类推多个容器之前就需要去维护拓扑关系. 因此在 Kubernates 中会直接首先创建一个 infra 的容器, 这样其他的容器就可以直接以 Join Network Namespace 方式加入进来, 其他的容器直接就只是对等关系, 彼此不会相互依赖.</p>
@@ -469,7 +468,84 @@ systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
 
 <p>详情见: <a href="https://www.usenix.org/conference/hotcloud16/workshop-program/presentation/burns">https://www.usenix.org/conference/hotcloud16/workshop-program/presentation/burns</a></p>
 
+<p>核心思想: Pod 对应传统环境的机器, 容器对应机器中的用户程序. 故凡是调度, 网络, 存储, 以及安全相关的属性, 基本都是 Pod 级别.</p>
+
+<h5 id="pod-进阶玩法">pod 进阶玩法</h5>
+
+<p>传统的 pod 声明如下, 字段过多, 业务与运维不分家</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">website</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">website</span>
+    <span class="na">role</span><span class="pi">:</span> <span class="s">frontend</span>
+  <span class="na">annotations</span><span class="pi">:</span>
+    <span class="s">podpreset.admission.kubernetes.io/podpreset-allow-database</span><span class="pi">:</span> <span class="s2">"</span><span class="s">resource</span><span class="nv"> </span><span class="s">version"</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">website</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+      <span class="na">volumeMounts</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/cache</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">cache-volume</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">DB_PORT</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">6379"</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cache-volume</span>
+      <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
+</code></pre></div></div>
+
+<p>开发人员提交的 pod 声明如下</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">website</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">website</span>
+    <span class="na">role</span><span class="pi">:</span> <span class="s">frontend</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">website</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
+</code></pre></div></div>
+
+<p>运维人员定义 PodPreset 对象, 由运维管控线上环境的 labels, env, volumes, volumeMount 等</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">settings.k8s.io/v1alpha1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PodPreset</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">allow-database</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">role</span><span class="pi">:</span> <span class="s">frontend</span>
+  <span class="na">env</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">DB_PORT</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">6379"</span>
+  <span class="na">volumeMounts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/cache</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">cache-volume</span>
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">cache-volume</span>
+      <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>
+</code></pre></div></div>
+
+<p>创建 pod</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl create <span class="nt">-f</span> preset.yaml
+<span class="nv">$ </span>kubectl create <span class="nt">-f</span> pod.yaml
+</code></pre></div></div>
+
 <h3 id="架构图">架构图</h3>
+
 <p><img src="https://cdn.jsdelivr.net/gh/chaimch/FigureBed@master/uPic/architecture.png" alt="architecture" /></p>
 
 <h3 id="组件功能">组件功能</h3>
@@ -559,6 +635,301 @@ systemd(1)-+-accounts-daemon(1984)-+-{gdbus}(1984)
 <h4 id="kube-proxy">kube-proxy</h4>
 
 <p>节点上的网络代理, 监控 kube-apiserver 服务于端点资源变化, 同时可以通过 iptables/ipvs 等配置负载均衡器, 为一组 pod 提供统一的 tcp/udp 的流量转发和负载均衡功能.</p>
+
+<h2 id="k8s作业调度与资源管理">k8s作业调度与资源管理</h2>
+
+<h3 id="基本的资源限制">基本的资源限制</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">frontend</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">db</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql</span>
+    <span class="na">env</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_ROOT_PASSWORD</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s2">"</span><span class="s">password"</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">64Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">250m"</span>
+      <span class="na">limits</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">wp</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">wordpress</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">64Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">250m"</span>
+      <span class="na">limits</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">500m"</span>
+</code></pre></div></div>
+
+<p>CPU 的资源被称为”可压缩资源”, 资源不足时, Pod并不会退出. 内存这种资源为”不可压缩资源”, 资源不足时候就会被 OOM 杀掉.</p>
+
+<p>其中资源一般还会有 limits 和 requests 值, 调度的时候, kube-scheduler 会按照 requests 的值进行计算, 但是在设置 cgroups 限制时候, 则会使用 limits 的值来进行设置.</p>
+
+<h3 id="资源分级">资源分级</h3>
+
+<h4 id="guaranteed-类别">Guaranteed 类别</h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">qos-example</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo-ctr</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">limits</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">200Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">700m"</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">200Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">700m"</span>
+</code></pre></div></div>
+
+<p>pod 中的每个 container 都同时设置 requests 和 limits, 且 requests 和 limits 的值相等.</p>
+
+<p>pod 被创建出来之后, 它的 qosClass 字段就会被 Kubernates 自动设置为 Guaranteed.</p>
+
+<p>当仅设置 limits 没有 requests 时候, Kubernates 会自动设置与 limits 相同的 requests 值, 此时也属于 Guaranteed 情况</p>
+
+<h4 id="burstable-类别">Burstable 类别</h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo-2</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">qos-example</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo-2-ctr</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="s">limits</span>
+        <span class="s">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">200Mi"</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">100Mi"</span>
+</code></pre></div></div>
+
+<p>当 pod 不满足 Guaranteed 条件, 但至少有一个 Container 设置了 requests, 此时属于 Burstable 类别</p>
+
+<h4 id="besteffort-类别">BestEffort 类别</h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo-3</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">qos-example</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">qos-demo-3-ctr</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+</code></pre></div></div>
+
+<p>如果一个 pod 既没有 requests, 也没有 limits, 则此时被归为 BestEffort</p>
+
+<h3 id="eviction--资源回收">Eviction / 资源回收</h3>
+
+<p>当 Kubernates 所在的宿主机上不可资源短缺时, 例如memory.available 内存, nodefs.available 宿主机磁盘空间, imagefs.available 镜像存储空间等不足时候, 就会触发 Eviction.</p>
+
+<p>常见的 Eviction 默认阈值如下</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>memory.available&lt;100Mi
+nodefs.available&lt;10%
+nodefs.inodesFree&lt;5%
+imagefs.available&lt;15%
+</code></pre></div></div>
+
+<p>自定义资源回收</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubelet <span class="nt">--eviction-hard</span><span class="o">=</span>imagefs.available&lt;10%,memory.available&lt;500Mi,nodefs.available&lt;5%,nodefs.inodesFree&lt;5% <span class="se">\</span>
+					<span class="nt">--eviction-soft</span><span class="o">=</span>imagefs.available&lt;30%,nodefs.available&lt;10% <span class="se">\</span>
+					<span class="nt">--eviction-soft-grace-period</span><span class="o">=</span>imagefs.available<span class="o">=</span>2m,nodefs.available<span class="o">=</span>2m <span class="se">\</span>
+					<span class="nt">--eviction-max-pod-grace-period</span><span class="o">=</span>600
+</code></pre></div></div>
+
+<p>Soft Eviction 允许为 Eviction 过程设置一段优雅杀死的时间, <code class="language-plaintext highlighter-rouge">imagefs.available=2m</code> 表示imagefs 不足的阈值达到 2 分钟后, 才开始进行 Eviction.</p>
+
+<p>Hard Eviction 模式下, Eviction 在达到阈值后就立刻开始.</p>
+
+<p>Eviction 阈值的数据主要从 cgroups 和 cAdvisor 中获得. 一旦达到阈值, 就会进入 MemoryPressure 或DiskPressure 状态(此时会打污点标记), 从而避免新的 Pod 被调度该节点上. 当 Eviction 发生时候按照如下顺序调度 Pod:</p>
+
+<ol>
+  <li>BestEffort 类别的 Pod</li>
+  <li>Burstable 类别, 并且资源使用量已经超过 requests 的 pod</li>
+  <li>Guaranteed 类别资源, 仅当 pod 资源使用量超过了 limits 限制, 或宿主机本身处于 Memory Pressure 状态时候, 该类别才会被选中进行 Eviction.</li>
+  <li>同 Qos 类别的 Pod 也会有一定的优先级.</li>
+</ol>
+
+<h3 id="独享-cpu">独享 cpu</h3>
+
+<p>容器中</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> docker run -it --rm --cpuset-cpus="1" u-stress:latest /bin/bash
+</code></pre></div></div>
+
+<p>Kubernates 中, 保证 Pod 为 Guaranteed 类别, 且将 CPU 资源的 requests 和 limits 设置为同一个相等的整数值</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">resources</span><span class="pi">:</span>
+      <span class="na">limits</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">200Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+      <span class="na">requests</span><span class="pi">:</span>
+        <span class="na">memory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">200Mi"</span>
+        <span class="na">cpu</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2"</span>
+</code></pre></div></div>
+
+<p>cpuset 可把容器绑定到指定的 cpu 核上, 避免 cpushare 来共享 cpu 的计算能力. 此时可以大大减少 cpu 之间的上下文切换次数, 性能会提高很多</p>
+
+<h3 id="默认调度器">默认调度器</h3>
+
+<p>为新创建出来的 pod 寻找最合适的节点.</p>
+
+<ol>
+  <li>在集群所有的节点中, 根据调度算法挑选出所有可以允许该 pod 的节点 -&gt; Predicate 调度算法</li>
+  <li>从 1 的结果中, 根据调度算法选择最符合条件的节点为最终结果 -&gt; Priority 调度算法</li>
+</ol>
+
+<h4 id="predicate-调度算法">Predicate 调度算法</h4>
+
+<p>该算法本质就是 filter, 按照调度策略从当前计算过滤出一系列符合条件的节点</p>
+
+<ol>
+  <li>
+    <p>GeneralPredicates 计算宿主机的 CPU 和内存资源是否够用, 简单检查下 Pod 的 requests 字段</p>
+  </li>
+  <li>
+    <p>Volume 过滤, 容器持久化相关调度策略</p>
+
+    <ol>
+      <li>NoDiskConflict 冲突检验, 多个 Pod 声明的 Volume 是否冲突. eg: AWS EVS 的 Volume 不允许多个 Pod 同时使用</li>
+      <li>MaxPDVolumeCountPredicate 检验某种类型的 Volume 是否超过一定数目.</li>
+      <li>VolumeZonePredicate 检查 Zone 高可用标签是否匹配</li>
+      <li>VolumeBindingPredicate 检查 pod对应的 PV 的 nodeAffinity 是否跟节点匹配</li>
+    </ol>
+  </li>
+  <li>
+    <p>宿主机过滤, 检验待调度的 Pod 是否满足 Node 自身的条件</p>
+
+    <ol>
+      <li>PodToleratesNodeTaints 检查 Node 的 Taint 与 Pod 的 Toleration 是否匹配, 是否可以被调度到该节点</li>
+      <li>NodeMemoryPressurePredicate 检查当前节点的内存是否已经不够充足</li>
+    </ol>
+  </li>
+  <li>
+    <p>Pod 相关过滤</p>
+
+    <ol>
+      <li>
+        <p>PodAffinityPredicate 检查待调度的 Pod 与 Node 之间的亲密和反亲密关系</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">with-pod-antiaffinity</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">affinity</span><span class="pi">:</span>
+    <span class="na">podAntiAffinity</span><span class="pi">:</span> 
+      <span class="na">requiredDuringSchedulingIgnoredDuringExecution</span><span class="pi">:</span> 
+      <span class="pi">-</span> <span class="na">weight</span><span class="pi">:</span> <span class="s">100</span>  
+        <span class="na">podAffinityTerm</span><span class="pi">:</span>
+          <span class="na">labelSelector</span><span class="pi">:</span>
+            <span class="na">matchExpressions</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">security</span> 
+              <span class="na">operator</span><span class="pi">:</span> <span class="s">In</span> 
+              <span class="na">values</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="s">S2</span>
+          <span class="na">topologyKey</span><span class="pi">:</span> <span class="s">kubernetes.io/hostname</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">with-pod-affinity</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/ocpqe/hello-pod</span>
+</code></pre></div>        </div>
+
+        <p>当携带 Key 是<code class="language-plaintext highlighter-rouge">kubernetes.io/hostname</code>标签的 Node中(topologyKey作用),  pod 不希望任何携带 security=S2 标签 Pod 存在同一个 Node 中.</p>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>一般情况 k8s 调度器会启动 16 个 Goroutine 并发的为集群的所有 Node 计算 Predicates, 最后返回可以运行该 Pod 的 Node 列表</p>
+
+<h4 id="priorities-算法">Priorities 算法</h4>
+
+<p>Priorities 为筛选出来的节点打分, 0-10 分制, 得分最高的节点会被 Pod 绑定</p>
+
+<ol>
+  <li>
+    <p>LeastRequestedPriority 优先选择 CPU 和 Memory 最多的宿主机, 计分规则如下</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>score <span class="o">=</span> <span class="o">(</span>cpu<span class="o">((</span>capacity-sum<span class="o">(</span>requested<span class="o">))</span>10/capacity<span class="o">)</span> + memory<span class="o">((</span>capacity-sum<span class="o">(</span>requested<span class="o">))</span>10/capacity<span class="o">))</span>/2
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>BalancedResourceAllocation 选择所有节点中各种资源分布最均衡的节点, 避免一个节点的 CPU 被大量分配, Memory 大量剩余, 计分规则如下</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>score <span class="o">=</span> 10 - variance<span class="o">(</span>cpuFraction,memoryFraction,volumeFraction<span class="o">)</span><span class="k">*</span>10
+</code></pre></div>    </div>
+
+    <p>Fraction 就是 Pod 请求的资源 / 节点上的可用资源. variance计算两种资源 Fraction 之间的差距</p>
+  </li>
+  <li>
+    <p>NodeAffinityPriority 类似 PodMatchNodeSelector</p>
+  </li>
+  <li>
+    <p>TaintTolerationPriority 类似 PodToleratesNodeTaints</p>
+  </li>
+  <li>
+    <p>InterPodAffinityPriority 类似 PodAffinityPredicate</p>
+  </li>
+  <li>
+    <p>ImageLocalityPriority 如果待调度的镜像很大, 且已经存在于某些 Node 中, 则这些 Node 得分会相当高</p>
+  </li>
+</ol>
+
+<p>由于集群和 Pod 的信息均已缓存化, 上述的算法执行过程还是很快的.</p>
+
+<h3 id="抢占式调度">抢占式调度</h3>
+
+<p>一般在 Pod 调度时候时候, 直到 Pod 被更新或者集群状态发送变化, 调度器才会对该 Pod 进行重新调度. 针对高优先级的 Pod 调度失败时, 希望可以挤走某些 Node 上优先级低的 Pod, 优先保障高优先级 Pod 调度成功. 只需要定义 PriorityClass, 如下所示</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">scheduling.k8s.io/v1beta1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PriorityClass</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">high-priority</span>
+<span class="na">value</span><span class="pi">:</span> <span class="m">1000000</span>
+<span class="na">globalDefault</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">This</span><span class="nv"> </span><span class="s">priority</span><span class="nv"> </span><span class="s">class</span><span class="nv"> </span><span class="s">should</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">used</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">high</span><span class="nv"> </span><span class="s">priority</span><span class="nv"> </span><span class="s">service</span><span class="nv"> </span><span class="s">pods</span><span class="nv"> </span><span class="s">only."</span>
+</code></pre></div></div>
+
+<p>Pod 中使用高优先级</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">env</span><span class="pi">:</span> <span class="s">test</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginx</span>
+    <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
+  <span class="na">priorityClassName</span><span class="pi">:</span> <span class="s">high-priority</span>
+</code></pre></div></div>
+
+<p>该 pod 的 spec.Priority 会被设置为 1000000, spec.nominatedNodeName设置为被强占的Node. 等待下一个调度周期时候, 决定是否需要将 Pod 运行在被强占的节点上, 主要是为了保证优雅退出时候, 集群的调度性会发生改变</p>
 
 </div><section class="article__sharing d-print-none"></section><div class="d-print-none"><footer class="article__footer"><meta itemprop="dateModified" content="2020-09-06T00:00:00+08:00"><!-- start custom article footer snippet -->
 
